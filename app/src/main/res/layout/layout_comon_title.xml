@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp">
+  <ImageView
+      android:id="@+id/btn_back"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/ic_back"
+      android:paddingLeft="@dimen/commend_padding"/>
+  <TextView
+      android:id="@+id/tv_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:text="标题"
+      android:textColor="@color/common_black"
+      android:textSize="15sp"/>
+  <TextView
+      android:id="@+id/btn_right"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:text="发布"
+      android:textColor="@color/commen_blue"
+      android:layout_marginRight="@dimen/commend_padding"
+      android:visibility="gone"
+      android:textSize="13sp"/>
+  </RelativeLayout>
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/common_divider"
+      />
+</LinearLayout>

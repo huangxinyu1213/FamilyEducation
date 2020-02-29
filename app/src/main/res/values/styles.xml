@@ -1,0 +1,52 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/commen_blue</item>
+        <item name="colorPrimaryDark">@color/commen_blue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="style_login_item">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:background">@drawable/bg_login_item</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+
+    <style name="switch_button_style">
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+    <style name="bottom_dialog_item_style">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/common_black</item>
+        <item name="android:background">@drawable/bg_list_item</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <!--自定义Dialog弹出的全屏样式,不要继承系统Dialog的样式会出现抖动的情况-->
+    <style name="dialog_full">
+        <item name="android:windowIsFloating">true</item>   <!--是否悬浮在界面上-->
+        <item name="android:windowIsTranslucent">true</item>   <!--是否半透明-->
+        <item name="android:windowNoTitle">true</item> <!--是否有标题-->
+        <item name="android:windowBackground">@android:color/transparent</item>  <!--窗口背景色透明-->
+        <item name="android:backgroundDimEnabled">true</item>  <!--背景是否模糊显示-->
+    </style>
+
+    <!--自定义Dialog的底部弹出的动画,直接从中间弹出的不加动画-->
+    <style name="DialogBottomAnimation"  parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_exit</item>
+    </style>
+</resources>
