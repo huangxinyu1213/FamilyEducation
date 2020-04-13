@@ -30,7 +30,7 @@ public class AddSubjectInfoTask extends FamilyEduHttpRequest<HttpResult> {
 
     @Override
     protected void addParam(HashMap<String, String> params) {
-
+        params.put("subject_name",subjectName);
     }
 
     @Override

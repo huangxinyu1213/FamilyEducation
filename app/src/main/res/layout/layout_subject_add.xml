@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
    <LinearLayout
-       android:layout_width="150dp"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:gravity="center_horizontal"
        android:orientation="vertical">
@@ -20,27 +20,37 @@
            />
        <EditText
            android:id="@+id/edt_subject"
-           android:layout_width="100dp"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:gravity="center"
+           android:textSize="15sp"
+           android:paddingTop="10dp"
+           android:paddingBottom="10dp"
+           android:background="@drawable/shape_edite_text"
            android:hint="输入科目名称"
            />
        <LinearLayout
-           android:layout_width="150dp"
+           android:layout_width="match_parent"
            android:layout_height="40dp"
-           android:layout_marginTop="15dp">
+           android:layout_marginTop="15dp"
+           android:gravity="center_vertical">
          <TextView
              android:id="@+id/btn_cancel"
            android:layout_width="0dp"
              android:layout_weight="1"
              android:gravity="center"
-           android:layout_height="wrap_content"
+           android:layout_height="match_parent"
+             android:background="@drawable/shape_dialog_button_left"
            android:text="取消"/>
            <TextView
                android:id="@+id/btn_confirm"
                android:layout_width="0dp"
                android:layout_weight="1"
                android:gravity="center"
-               android:layout_height="wrap_content"
+               android:layout_height="match_parent"
+               android:background="@drawable/shape_dialog_button_left"
                android:text="确定"/>
        </LinearLayout>
    </LinearLayout>

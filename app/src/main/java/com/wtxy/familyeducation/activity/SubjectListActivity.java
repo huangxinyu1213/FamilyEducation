@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.iview.ISubjectListView;
 import com.wtxy.familyeducation.presenter.SubjectPresenter;
 import com.wtxy.familyeducation.util.ScreenUtils;
+import com.wtxy.familyeducation.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,13 +95,13 @@ public class SubjectListActivity extends BaseActivity implements ISubjectListVie
 
     @Override
     public void showToast(String msg) {
-
+        ToastUtil.showShortToast(this,msg);
     }
 
     private void showAddDialog(){
         View view = LayoutInflater.from(this).inflate(R.layout.layout_subject_add,null,false);
         final AlertDialog dialog = new AlertDialog.Builder(this).setView(view).create();
-
+        final EditText editText = view.findViewById(R.id.edt_subject);
         TextView btn_cancel_high_opion = view.findViewById(R.id.btn_cancel);
         TextView btn_agree_high_opion = view.findViewById(R.id.btn_confirm);
 
@@ -113,6 +116,11 @@ public class SubjectListActivity extends BaseActivity implements ISubjectListVie
         btn_agree_high_opion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(editText.getText())){
+                    showToast("请输入科目名称");
+                    return;
+                }
+                subjectPresenter.addSubject(editText.getText().toString().trim());
                 dialog.dismiss();
             }
         });

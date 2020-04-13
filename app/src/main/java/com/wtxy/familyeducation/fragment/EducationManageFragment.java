@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.activity.ManagerListManageActivity;
 import com.wtxy.familyeducation.activity.StudentManageListActivity;
+import com.wtxy.familyeducation.activity.SubjectListActivity;
 import com.wtxy.familyeducation.activity.TeacherManageListActivity;
 import com.wtxy.familyeducation.adapter.CommonListAdapter;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
@@ -71,7 +72,13 @@ public class EducationManageFragment extends BaseFragment{
        Intent intent = null;
        switch (userInfoType){
            case UserInfo.ACCOUNT_TYPE_MANAGER:
-               intent =  new Intent(getActivity(), ManagerListManageActivity.class);
+               if (educationManageInfo.getManageType() == EducationManageInfo.MANAGE_TYPE_MANAGER_SUBJECT){
+                   intent = new Intent(getActivity(), SubjectListActivity.class);
+                   intent.putExtra(Const.KEY_IS_SELECT,false);
+               }else {
+                   intent = new Intent(getActivity(), ManagerListManageActivity.class);
+                   intent.putExtra(Const.KEY_MANAGE_INFO,educationManageInfo);
+               }
                break;
            case UserInfo.ACCOUNT_TYPE_TEACHER:
                intent = new Intent(getActivity(),TeacherManageListActivity.class);
@@ -83,7 +90,6 @@ public class EducationManageFragment extends BaseFragment{
                intent =  new Intent(getActivity(), ManagerListManageActivity.class);
                break;
        }
-       intent.putExtra(Const.KEY_MANAGE_INFO,educationManageInfo);
        startActivity(intent);
     }
 }

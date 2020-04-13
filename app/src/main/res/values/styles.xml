@@ -49,4 +49,7 @@
         <item name="android:windowEnterAnimation">@anim/dialog_bottom_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_bottom_exit</item>
     </style>
+    <style name="LodingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>
