@@ -9,4 +9,7 @@
     <color name="common_white">#ffffff</color>
     <color name="common_gray40">#40000000</color>
     <color name="common_gray10">#CCCCCC</color>
+
+    <!--默认大背景颜色-->
+    <color name="commen_bg">#f2f2f2</color>
 </resources>

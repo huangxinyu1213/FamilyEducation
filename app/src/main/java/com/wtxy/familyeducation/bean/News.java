@@ -7,7 +7,7 @@ package com.wtxy.familyeducation.bean;
  */
 public class News {
     public String news_id;
-    public String new_title;
+    public String news_title;
     public String news_subtitle;
     public String news_date;
     public String news_url;

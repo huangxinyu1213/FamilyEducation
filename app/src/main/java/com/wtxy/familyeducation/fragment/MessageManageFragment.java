@@ -1,5 +1,6 @@
 package com.wtxy.familyeducation.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,10 +19,13 @@ import com.wtxy.familyeducation.adapter.NewsAdapter;
 import com.wtxy.familyeducation.adapter.NoticeAdapter;
 import com.wtxy.familyeducation.bean.News;
 import com.wtxy.familyeducation.bean.Notices;
+import com.wtxy.familyeducation.constant.Const;
+import com.wtxy.familyeducation.home.PublishActivity;
 import com.wtxy.familyeducation.iview.IMessageManageView;
 import com.wtxy.familyeducation.presenter.MessageManagePresenter;
 import com.wtxy.familyeducation.util.ToastUtil;
 import com.wtxy.familyeducation.view.BottomDialog;
+import com.wtxy.familyeducation.web.WebActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +99,19 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
         noticeListView.setAdapter(noticeAdapter);
         mPresenter = new MessageManagePresenter(this);
         mPresenter.loadNews();
+        mPresenter.loadNotices();
+        messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                goToWebActivity(newsData.get(i).news_url,"新闻");
+            }
+        });
+        noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                goToWebActivity(noticeData.get(i).notice_detail,"公告");
+            }
+        });
     }
 
     private void initView(View view) {
@@ -179,9 +197,23 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
             @Override
             public void onBottomItemClick(BottomDialog dialog, View view) {
               dialog.dismiss();
+              switch (view.getId()){
+                  case R.id.btn_pub_news:
+                      Intent intent = new Intent(getActivity(), PublishActivity.class);
+                      getActivity().startActivityForResult(intent, Const.REQUEST_PUB_NEWS);
+                      break;
+              }
             }
         });
         bottomDialog.show();
+    }
+
+
+    private void goToWebActivity(String url,String title) {
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra(WebActivity.TITLE, title);
+        intent.putExtra(WebActivity.WEB_URL, url);
+        startActivity(intent);
     }
 
 }

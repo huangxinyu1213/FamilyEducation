@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_login:
-                //mPresenter.login();
+                mPresenter.login();
                 Intent intent1 = new Intent(this, HomeActivity.class);
                 startActivity(intent1);
                 break;

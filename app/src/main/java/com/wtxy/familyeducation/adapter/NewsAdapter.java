@@ -25,8 +25,10 @@ public class NewsAdapter extends CommonAdapter<News>{
         ImageView imageView = helper.getView(R.id.image);
         TextView tvTitle = helper.getView(R.id.tv_title);
         TextView tvContent = helper.getView(R.id.tv_content);
-        Picasso.get().load(item.news_url).into(imageView);
-        tvTitle.setText(item.new_title);
+        String testUrl = "https://baike.baidu.com/pic/%E7%85%A7%E7%89%87/1465692/1/37d3d539b6003af3" +
+                "56370ff93f2ac65c1138b69e?fr=lemma&ct=single#aid=1&pic=37d3d539b6003af356370ff93f2ac65c1138b69e";
+        Picasso.get().load(testUrl).error(R.mipmap.ic_launcher).into(imageView);
+        tvTitle.setText(item.news_title);
         tvContent.setText(item.news_subtitle);
     }
 }

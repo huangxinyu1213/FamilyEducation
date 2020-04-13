@@ -8,4 +8,7 @@
     <string name="title_home">信息管理</string>
     <string name="title_dashboard">教务管理</string>
     <string name="title_notifications">我的</string>
+
+    <string name="error_net_prompt">网络不给力，请检查设置后再试</string>
+
 </resources>

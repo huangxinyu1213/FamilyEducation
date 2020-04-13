@@ -1,6 +1,7 @@
 package com.wtxy.familyeducation.biz;
 
 import com.wtxy.familyeducation.httpresult.LoginHttpResult;
+import com.wtxy.familyeducation.ibiz.ILoginBiz;
 import com.wtxy.familyeducation.task.LoginTask;
 import com.zhy.http.okhttp.requestBase.TaskListener;
 
@@ -9,7 +10,7 @@ import com.zhy.http.okhttp.requestBase.TaskListener;
  * @Date: 2020/2/23
  * @Describe:
  */
-public class LoginBiz implements ILoginBiz{
+public class LoginBiz implements ILoginBiz {
 
     @Override
     public void login(int loginType, String loginName, String pwd, TaskListener<LoginHttpResult> taskListener) {

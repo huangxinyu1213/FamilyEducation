@@ -26,6 +26,6 @@ public class NoticeAdapter extends CommonAdapter<Notices>{
         TextView tvTitle = helper.getView(R.id.tv_title);
         TextView tvContent = helper.getView(R.id.tv_content);
         tvTitle.setText(item.notice_title);
-        tvContent.setText(item.notice_detail);
+        tvContent.setText(item.notice_author);
     }
 }

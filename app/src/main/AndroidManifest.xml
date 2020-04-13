@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.wtxy.familyeducation">
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -9,6 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ClassInfoActivity">
+        </activity>
+        <activity android:name=".activity.SubjectListActivity">
+        </activity>
+        <activity android:name=".activity.TeacherInfoActivity">
+        </activity>
+        <activity android:name=".activity.StudentManageListActivity">
+        </activity>
+        <activity android:name=".activity.ManagerListManageActivity">
+        </activity>
+        <activity android:name=".activity.TeacherManageListActivity">
+        </activity>
         <activity android:name=".home.PublishActivity">
         </activity>
         <activity
@@ -28,6 +45,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".web.WebActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

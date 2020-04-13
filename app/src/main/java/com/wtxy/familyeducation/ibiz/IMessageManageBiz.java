@@ -1,6 +1,7 @@
-package com.wtxy.familyeducation.biz;
+package com.wtxy.familyeducation.ibiz;
 
 import com.wtxy.familyeducation.httpresult.LoadNewsHttpResult;
+import com.wtxy.familyeducation.httpresult.LoadNoticeHttpResult;
 import com.zhy.http.okhttp.requestBase.TaskListener;
 
 /**
@@ -10,4 +11,5 @@ import com.zhy.http.okhttp.requestBase.TaskListener;
  */
 public interface IMessageManageBiz {
     void loadNews(TaskListener<LoadNewsHttpResult> taskListener);
+    void loadNotices(TaskListener<LoadNoticeHttpResult> taskListener);
 }

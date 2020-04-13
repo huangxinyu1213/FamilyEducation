@@ -3,9 +3,11 @@ package com.wtxy.familyeducation.presenter;
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.constant.LoginStateUtil;
 import com.wtxy.familyeducation.httpresult.LoginHttpResult;
+import com.wtxy.familyeducation.user.UserInfo;
+import com.wtxy.familyeducation.user.UserInfoManager;
 import com.wtxy.familyeducation.util.SPUtils;
 import com.wtxy.familyeducation.iview.ILoginView;
-import com.wtxy.familyeducation.biz.ILoginBiz;
+import com.wtxy.familyeducation.ibiz.ILoginBiz;
 import com.wtxy.familyeducation.biz.LoginBiz;
 import com.wtxy.familyeducation.iview.IView;
 import com.zhy.http.okhttp.requestBase.TaskListener;
@@ -24,10 +26,11 @@ public class LoginPresenter {
     }
 
     public void login() {
-        if (view instanceof ILoginView){
-           ILoginView loginView = (ILoginView) view;
-            loginBiz.login(loginView.getLoginType(),loginView.getCount(),loginView.getPwd(),taskListener);
-        }
+        UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_MANAGER);
+//        if (view instanceof ILoginView){
+//           ILoginView loginView = (ILoginView) view;
+//            loginBiz.login(loginView.getLoginType(),loginView.getCount(),loginView.getPwd(),taskListener);
+//        }
     }
 
     private TaskListener<LoginHttpResult> taskListener = new TaskListener<LoginHttpResult>() {

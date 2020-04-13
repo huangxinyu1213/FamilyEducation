@@ -1,7 +1,7 @@
 package com.wtxy.familyeducation.presenter;
 
-import com.wtxy.familyeducation.adapter.MessageManagePageAdapter;
-import com.wtxy.familyeducation.biz.IMessageManageBiz;
+import com.wtxy.familyeducation.httpresult.LoadNoticeHttpResult;
+import com.wtxy.familyeducation.ibiz.IMessageManageBiz;
 import com.wtxy.familyeducation.biz.MessageManageBiz;
 import com.wtxy.familyeducation.httpresult.LoadNewsHttpResult;
 import com.wtxy.familyeducation.iview.IMessageManageView;
@@ -22,7 +22,11 @@ public class MessageManagePresenter {
     }
 
     public void loadNews(){
+       messageManageBiz.loadNews(loadNewsHttpResultTaskListener);
+    }
 
+    public void loadNotices(){
+        messageManageBiz.loadNotices(loadNoticeHttpResultTaskListener);
     }
 
     private TaskListener<LoadNewsHttpResult> loadNewsHttpResultTaskListener = new TaskListener<LoadNewsHttpResult>() {
@@ -37,6 +41,20 @@ public class MessageManagePresenter {
            if (result != null && result.isSuccess()){
                ((IMessageManageView)messageManageView).refreshNewsView(result.getResult());
            }
+        }
+    };
+
+    private TaskListener<LoadNoticeHttpResult> loadNoticeHttpResultTaskListener = new TaskListener<LoadNoticeHttpResult>() {
+        @Override
+        public void onTaskStart(TaskListener<LoadNoticeHttpResult> listener) {
+            messageManageView.showLoading();
+        }
+
+        @Override
+        public void onTaskComplete(TaskListener<LoadNoticeHttpResult> listener, LoadNoticeHttpResult result, Exception e) {
+            if (result != null && result.isSuccess()){
+                ((IMessageManageView)messageManageView).refreshNoticeView(result.getResult());
+            }
         }
     };
 

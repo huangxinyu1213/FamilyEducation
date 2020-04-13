@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--管理员教务管理列表-->
+    <string-array name="manager_manage_list">
+        <item>教师管理</item>
+        <item>班级管理</item>
+        <item>科目管理</item>
+    </string-array>
+    <!--教师教务管理列表-->
+    <string-array name="teacher_manage_list">
+        <item>成绩管理</item>
+        <item>作业管理</item>
+    </string-array>
+    <!--学生(家长)教务管理列表-->
+    <string-array name="student_manage_list">
+        <item>查看成绩</item>
+        <item>查看作业</item>
+        <item>查看课表</item>
+    </string-array>
+</resources>

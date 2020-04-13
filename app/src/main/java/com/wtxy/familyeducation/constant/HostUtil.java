@@ -6,5 +6,5 @@ package com.wtxy.familyeducation.constant;
  * @Describe:
  */
 public class HostUtil {
-    public static final String HOST = "http://111.229.20.244:8080/teacherList";
+    public static final String HOST = "http://111.229.20.244:8080";
 }

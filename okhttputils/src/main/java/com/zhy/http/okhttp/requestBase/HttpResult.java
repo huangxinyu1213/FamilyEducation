@@ -66,7 +66,7 @@ public class HttpResult implements AbType,Parcelable {
 	};
 
 	public boolean isSuccess() {
-		return mState.equals("10000");
+		return mState.equals("0");
 	}
 
 	public String getErrMessage() {
