@@ -2,6 +2,7 @@ package com.wtxy.familyeducation.presenter;
 
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.constant.LoginStateUtil;
+import com.wtxy.familyeducation.constant.Tutor;
 import com.wtxy.familyeducation.httpresult.LoginHttpResult;
 import com.wtxy.familyeducation.user.UserInfo;
 import com.wtxy.familyeducation.user.UserInfoManager;
@@ -20,13 +21,30 @@ import com.zhy.http.okhttp.requestBase.TaskListener;
 public class LoginPresenter {
     private ILoginBiz loginBiz;
     private IView view;
-    public LoginPresenter(IView view){
-       this.loginBiz = new LoginBiz();
-       this.view = view;
+
+    public LoginPresenter(IView view) {
+        this.loginBiz = new LoginBiz();
+        this.view = view;
     }
 
-    public void login() {
-        UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_MANAGER);
+    public void login(int loginType) {
+        switch (loginType) {
+            case Tutor.TYPE_TEACHER:
+                UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_TEACHER);
+                break;
+            case Tutor.TYPE_MANAGER:
+                UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_MANAGER);
+                break;
+            case Tutor.TYPE_PARENT:
+                UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_PARENT);
+                break;
+            case Tutor.TYPE_STUDENT:
+                UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_STUDENT);
+                break;
+            default:
+                UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_TEACHER);
+        }
+
 //        if (view instanceof ILoginView){
 //           ILoginView loginView = (ILoginView) view;
 //            loginBiz.login(loginView.getLoginType(),loginView.getCount(),loginView.getPwd(),taskListener);
@@ -42,14 +60,14 @@ public class LoginPresenter {
         @Override
         public void onTaskComplete(TaskListener<LoginHttpResult> listener, LoginHttpResult result, Exception e) {
             view.hideLoading();
-            if (result != null && result.isSuccess()){
+            if (result != null && result.isSuccess()) {
                 //登录成功
-                SPUtils.put(view.getContext(),Const.KEY_LOGIN_ID,result.getResult().account_id);
-                SPUtils.put(view.getContext(),Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_SUCCESS);
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_ID, result.getResult().account_id);
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_SUCCESS);
 
-            }else {
+            } else {
                 //登录失败
-                SPUtils.put(view.getContext(),Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_FAILD);
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_FAILD);
             }
         }
     };

@@ -14,11 +14,12 @@ import com.wtxy.familyeducation.constant.Tutor;
 import com.wtxy.familyeducation.presenter.LoginPresenter;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
-   private int mLoginType;
-   private EditText edtName;
-   private EditText edtPwd;
-   private View btnLogin;
-   private LoginPresenter mPresenter;
+    private int mLoginType;
+    private EditText edtName;
+    private EditText edtPwd;
+    private View btnLogin;
+    private LoginPresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
@@ -31,15 +32,17 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         mPresenter = new LoginPresenter(this);
     }
 
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_login:
-                mPresenter.login();
+                mPresenter.login(mLoginType);
                 Intent intent1 = new Intent(this, HomeActivity.class);
                 startActivity(intent1);
+                //todo 跳转后暂时先直接finish
+                finish();
                 break;
             case R.id.regist:
-                Intent intent = new Intent(this,RegistActivity.class);
+                Intent intent = new Intent(this, RegistActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -50,10 +53,10 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     /**
-     *  根据登录类别显示标题
+     * 根据登录类别显示标题
      */
     private void refreshTitleView() {
-        switch (mLoginType){
+        switch (mLoginType) {
             case Tutor.TYPE_TEACHER:
                 showTitle("教师登录");
                 break;
@@ -108,12 +111,12 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void clearCount() {
-       edtName.setText("");
+        edtName.setText("");
     }
 
     @Override
     public void clearPwd() {
-       edtPwd.setText("");
+        edtPwd.setText("");
     }
 
     @Override

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.TeacherManageListActivity">
+    tools:context=".activity.ManagerListManageActivity">
 
     <include layout="@layout/layout_comon_title" />
 
