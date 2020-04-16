@@ -26,7 +26,7 @@ public class PublishNewsTask extends FamilyEduHttpRequest<HttpResult> {
 
     @Override
     protected String getPath() {
-        return "/postNews";
+        return "/post/news";
     }
 
     @Override
