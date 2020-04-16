@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".activity.ManagerListManageActivity">
+<include layout="@layout/layout_comon_title"/>
+<ListView
+    android:id="@+id/manage_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.ManagerListManageActivity">
-   <include layout="@layout/layout_comon_title"/>
-    <ListView
-        android:id="@+id/manage_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+    android:layout_height="match_parent"></ListView>
 </LinearLayout>

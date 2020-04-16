@@ -62,6 +62,7 @@ public class ManagerListManageActivity extends BaseActivity implements IManagerL
             intent.putExtra(Const.KEY_TEACHER_INFO,itemBean);
         }else if (itemBean instanceof ClassInfo){
             intent = new Intent(this,ClassInfoActivity.class);
+            intent.putExtra(Const.KEY_CLASS_INFO,itemBean);
         }else if (itemBean instanceof SubjectInfo){
             intent = new Intent(this,SubjectListActivity.class);
         }

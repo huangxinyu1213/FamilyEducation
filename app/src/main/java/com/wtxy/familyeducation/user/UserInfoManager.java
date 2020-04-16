@@ -23,4 +23,8 @@ public class UserInfoManager {
     public UserInfo getCurrentUserInfo(){
         return userInfo;
     }
+
+    public void loginOut(){
+
+    }
 }

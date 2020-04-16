@@ -1,9 +1,14 @@
 package com.wtxy.familyeducation.presenter;
 
+import android.os.Parcelable;
+
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.constant.LoginStateUtil;
 import com.wtxy.familyeducation.constant.Tutor;
 import com.wtxy.familyeducation.httpresult.LoginHttpResult;
+import com.wtxy.familyeducation.user.ParentInfo;
+import com.wtxy.familyeducation.user.StudentInfo;
+import com.wtxy.familyeducation.user.TeachInfo;
 import com.wtxy.familyeducation.user.UserInfo;
 import com.wtxy.familyeducation.user.UserInfoManager;
 import com.wtxy.familyeducation.util.SPUtils;
@@ -27,18 +32,27 @@ public class LoginPresenter {
         this.view = view;
     }
 
-    public void login(int loginType) {
+    public void login(int loginType,String name) {
         switch (loginType) {
             case Tutor.TYPE_TEACHER:
+                TeachInfo teachInfo = new TeachInfo();
+                teachInfo.teacher_name = name;
+                UserInfoManager.getInstance().getCurrentUserInfo().setTeachInfo(teachInfo);
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_TEACHER);
                 break;
             case Tutor.TYPE_MANAGER:
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_MANAGER);
                 break;
             case Tutor.TYPE_PARENT:
+                ParentInfo parentInfo = new ParentInfo();
+                parentInfo.parent_name = name;
+                UserInfoManager.getInstance().getCurrentUserInfo().setParentInfo(parentInfo);
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_PARENT);
                 break;
             case Tutor.TYPE_STUDENT:
+                StudentInfo studentInfo = new StudentInfo();
+                studentInfo.student_name = name;
+                UserInfoManager.getInstance().getCurrentUserInfo().setStudentInfo(studentInfo);
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_STUDENT);
                 break;
             default:

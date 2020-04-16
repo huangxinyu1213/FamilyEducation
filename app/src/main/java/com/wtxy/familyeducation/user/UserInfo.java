@@ -30,15 +30,43 @@ public class UserInfo {
     /**
      *  教师信息
      */
-  private TeachInfo teachInfo;
+  private TeachInfo teachInfo = new TeachInfo();
     /**
      *  学生信息
      */
-  private StudentInfo studentInfo;
+  private StudentInfo studentInfo = new StudentInfo();
     /**
      *  家长信息
      */
-  private ParentInfo parentInfo;
+  private ParentInfo parentInfo = new ParentInfo();
+
+  public String getUserTypeName(){
+      switch (currentUserType){
+          case ACCOUNT_TYPE_MANAGER:
+              return "管理员";
+          case ACCOUNT_TYPE_PARENT:
+              return "家长";
+          case ACCOUNT_TYPE_STUDENT:
+              return "学生";
+          case ACCOUNT_TYPE_TEACHER:
+              return "教师";
+      }
+      return "管理员";
+  }
+
+  public String getUserName(){
+      switch (currentUserType){
+          case ACCOUNT_TYPE_MANAGER:
+              return "管理员";
+          case ACCOUNT_TYPE_PARENT:
+              return parentInfo.parent_name;
+          case ACCOUNT_TYPE_STUDENT:
+              return studentInfo.student_name;
+          case ACCOUNT_TYPE_TEACHER:
+              return teachInfo.teacher_name;
+      }
+      return "管理员";
+  }
 
     public int getCurrentUserType() {
         return currentUserType;

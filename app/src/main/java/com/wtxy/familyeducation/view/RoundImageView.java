@@ -3,39 +3,33 @@ package com.wtxy.familyeducation.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.wtxy.familyeducation.R;
 
-
 /**
- * Created by xhma on 16-3-23.
- * 圆形ImageView，可设置最多两个宽度不同且颜色不同的圆形边框。
- * 设置颜色在xml布局文件中由自定义属性配置参数指定
+ * Created by mxh on 2017/12/18.
  */
 
-/**
- * 自定义属性介绍：
- *    <!-- border_outside_color 外部圆圈的颜色 -->
- *    <!-- border_inside_color 内部部圆圈的颜色 -->
- *    <!-- border_thickness 外圆和内圆的宽度 -->
- */
 public class RoundImageView extends ImageView {
     private int mBorderThickness = 0;
     private Context mContext;
     private int defaultColor = 0xFFFFFFFF;
     // 如果只有其中一个有值，则只画一个圆形边框
     private int mBorderOutsideColor = 0;
+    private int mBorderOutsideColorDown = 0; //外边框按下的颜色
+    private int mBorderOutsideColorDefault = 0; //外边框默认的颜色
     private int mBorderInsideColor = 0;
     // 控件默认长、宽
     private int defaultWidth = 0;
@@ -59,14 +53,27 @@ public class RoundImageView extends ImageView {
     }
 
     private void setCustomAttributes(AttributeSet attrs) {
-        TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.roundedimageview);
-        mBorderThickness = a.getDimensionPixelSize(R.styleable.roundedimageview_border_thickness, 0);
-        mBorderOutsideColor = a.getColor(R.styleable.roundedimageview_border_outside_color,defaultColor);
-        mBorderInsideColor = a.getColor(R.styleable.roundedimageview_border_inside_color, defaultColor);
+        TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.RoundImageView);
+        mBorderThickness = a.getDimensionPixelSize(R.styleable.RoundImageView_border_thickness, 0);
+        mBorderOutsideColor = a.getColor(R.styleable.RoundImageView_border_outside_color,defaultColor);
+        mBorderOutsideColorDefault = a.getColor(R.styleable.RoundImageView_border_outside_color_default,defaultColor);
+        mBorderOutsideColorDown = a.getColor(R.styleable.RoundImageView_border_outside_color_touch_down,defaultColor);
+        mBorderInsideColor = a.getColor(R.styleable.RoundImageView_border_inside_color, defaultColor);
+        //mBorderOutsideColor = mBorderOutsideColorDefault;
+    }
+
+    private boolean isNeedRoundImage = false;
+
+    public void needRoundImage(boolean isNeedRoundImage){
+        this.isNeedRoundImage = isNeedRoundImage;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (!isNeedRoundImage){
+            super.onDraw(canvas);
+            return;
+        }
         Drawable drawable = getDrawable() ;
         if (drawable == null) {
             return;
@@ -77,11 +84,20 @@ public class RoundImageView extends ImageView {
         this.measure(0, 0);
         if (drawable.getClass() == NinePatchDrawable.class)
             return;
-        Bitmap b = ((BitmapDrawable) drawable).getBitmap();
+        Bitmap b;
+        if (drawable instanceof BitmapDrawable) {
+            b = ((BitmapDrawable) drawable).getBitmap();
+        }else {
+            Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canva = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            b = bitmap;
+        }
         if (b == null) {
             return;
         }
-        Bitmap bitmap = b.copy(Config.ARGB_8888, true);
+        Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
         if (defaultWidth == 0) {
             defaultWidth = getWidth();
         }
@@ -89,21 +105,9 @@ public class RoundImageView extends ImageView {
             defaultHeight = getHeight();
         }
         int radius = 0;
-        if (mBorderInsideColor != defaultColor && mBorderOutsideColor != defaultColor) {// 定义画两个边框，分别为外圆边框和内圆边框
             radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2 - 2 * mBorderThickness;
             // 画内圆
-            drawCircleBorder(canvas, radius + mBorderThickness / 2,mBorderInsideColor);
-            // 画外圆
-            drawCircleBorder(canvas, radius + mBorderThickness + mBorderThickness / 2, mBorderOutsideColor);
-        } else if (mBorderInsideColor != defaultColor && mBorderOutsideColor == defaultColor) {// 定义画一个边框
-            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2 - mBorderThickness;
-            drawCircleBorder(canvas, radius + mBorderThickness / 2, mBorderInsideColor);
-        } else if (mBorderInsideColor == defaultColor && mBorderOutsideColor != defaultColor) {// 定义画一个边框
-            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2 - mBorderThickness;
-            drawCircleBorder(canvas, radius + mBorderThickness / 2, mBorderOutsideColor);
-        } else {// 没有边框
-            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2;
-        }
+        drawCircleBorder(canvas, radius,Color.WHITE);
         Bitmap roundBitmap = getCroppedRoundBitmap(bitmap, radius);
         canvas.drawBitmap(roundBitmap, defaultWidth / 2 - radius, defaultHeight / 2 - radius, null);
     }
@@ -142,7 +146,7 @@ public class RoundImageView extends ImageView {
         }
         Bitmap output = Bitmap.createBitmap(scaledSrcBmp.getWidth(),
                 scaledSrcBmp.getHeight(),
-                Config.ARGB_8888);
+                Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
         Paint paint = new Paint();
@@ -156,7 +160,7 @@ public class RoundImageView extends ImageView {
                 scaledSrcBmp.getHeight() / 2,
                 scaledSrcBmp.getWidth() / 2,
                 paint);
-        paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(scaledSrcBmp, rect, rect, paint);
         bmp = null;
         squareBitmap = null;
@@ -179,5 +183,25 @@ public class RoundImageView extends ImageView {
             /* 设置paint的外框宽度 */
         paint.setStrokeWidth(mBorderThickness);
         canvas.drawCircle(defaultWidth / 2, defaultHeight / 2, radius, paint);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        if (isNeedRoundImage){
+            return false;
+        }
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+              mBorderInsideColor = getResources().getColor(R.color.common_white);
+              invalidate();
+              break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                mBorderInsideColor = Color.WHITE;
+                invalidate();
+                break;
+        }
+        return false;
     }
 }

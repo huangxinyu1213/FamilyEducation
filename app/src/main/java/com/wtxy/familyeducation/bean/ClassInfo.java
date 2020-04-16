@@ -7,14 +7,14 @@ package com.wtxy.familyeducation.bean;
  */
 public class ClassInfo extends BaseItemBean{
 
-    private String class_id;
+    private int class_id;
     private String class_name;
 
-    public String getClass_id() {
+    public int getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(String class_id) {
+    public void setClass_id(int class_id) {
         this.class_id = class_id;
     }
 

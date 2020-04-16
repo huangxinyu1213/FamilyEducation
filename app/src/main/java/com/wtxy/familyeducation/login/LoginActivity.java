@@ -3,6 +3,7 @@ package com.wtxy.familyeducation.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -24,7 +25,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
         super.onCreate(savedInstanceState);
-        mLoginType = getIntent().getIntExtra("loginType", Tutor.TYPE_TEACHER);//默认跳转教师
+        mLoginType = getIntent().getIntExtra("loginType", Tutor.TYPE_MANAGER);//默认跳转教师
         refreshTitleView();
         edtName = findViewById(R.id.edtName);
         edtPwd = findViewById(R.id.edtPwd);
@@ -35,7 +36,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                mPresenter.login(mLoginType);
+                mPresenter.login(mLoginType, TextUtils.isEmpty(edtName.getText()) ? "测试" : edtName.getText().toString());
                 Intent intent1 = new Intent(this, HomeActivity.class);
                 startActivity(intent1);
                 //todo 跳转后暂时先直接finish

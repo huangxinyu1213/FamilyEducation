@@ -14,6 +14,7 @@ public class Const {
     public static final String KEY_TEACHER_INFO = "teacher_info";
     public static final String KEY_IS_SELECT = "isSelect";
     public static final String KEY_SUBJECT_INFO = "subject_info";
+    public static final String KEY_CLASS_INFO = "class_info";
     /**
      *  信息管理
      */

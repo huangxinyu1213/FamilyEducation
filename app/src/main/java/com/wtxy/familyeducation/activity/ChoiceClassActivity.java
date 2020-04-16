@@ -44,21 +44,21 @@ public class ChoiceClassActivity extends BaseActivity {
 
     private void getTestClass() {
         ClassInfo classInfo1 = new ClassInfo();
-        classInfo1.setClass_id("111");
+        classInfo1.setClass_id(111);
         classInfo1.setClass_name("计算机1班");
         classList.add(classInfo1);
 
         ClassInfo classInfo2 = new ClassInfo();
-        classInfo2.setClass_id("222");
+        classInfo2.setClass_id(222);
         classInfo2.setClass_name("计算机2班");
         classList.add(classInfo2);
 
         ClassInfo classInfo3 = new ClassInfo();
-        classInfo3.setClass_id("333");
+        classInfo3.setClass_id(333);
         classInfo3.setClass_name("经管1班");
         classList.add(classInfo3);
         ClassInfo classInfo4 = new ClassInfo();
-        classInfo4.setClass_id("444");
+        classInfo4.setClass_id(444);
         classInfo4.setClass_name("经管2班");
         classList.add(classInfo4);
     }

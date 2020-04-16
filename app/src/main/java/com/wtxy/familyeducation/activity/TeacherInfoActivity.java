@@ -128,8 +128,13 @@ public class TeacherInfoActivity extends BaseActivity implements ITeacherInfoVie
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             SubjectInfo subjectInfo = (SubjectInfo) data.getSerializableExtra(Const.KEY_SUBJECT_INFO);
-            teachInfo.subject_name = subjectInfo.getSubject_name();
-            teachInfo.subject_id = subjectInfo.getSubject_id()+"";
+            if (subjectInfo != null) {
+                if (teachInfo == null){
+                    teachInfo = new TeachInfo();
+                }
+                teachInfo.subject_name = subjectInfo.getSubject_name();
+                teachInfo.subject_id = subjectInfo.getSubject_id() + "";
+            }
             refreshTeachInfo();
         }
     }
