@@ -41,7 +41,7 @@ public class MineFragment extends BaseFragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showTitle("个人");
-        view.findViewById(R.id.btn_back).setVisibility(View.GONE);
+        view.findViewById(R.id.btn_back).setVisibility(View.VISIBLE);
         view.findViewById(R.id.divider).setVisibility(View.GONE);
         TextView tvName =  view.findViewById(R.id.tv_name);
         TextView tvLable = view.findViewById(R.id.tv_lable);
