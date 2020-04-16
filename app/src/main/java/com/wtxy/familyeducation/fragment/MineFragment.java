@@ -1,5 +1,6 @@
 package com.wtxy.familyeducation.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wtxy.familyeducation.MainActivity;
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.user.UserInfo;
 import com.wtxy.familyeducation.user.UserInfoManager;
@@ -51,10 +53,13 @@ public class MineFragment extends BaseFragment{
             tvLable.setText(userInfo.getUserTypeName());
         }
         TextView tvRightButton = view.findViewById(R.id.btn_right);
+        tvRightButton.setVisibility(View.VISIBLE);
         tvRightButton.setText("退出登录");
         tvRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().startActivity(intent);
                 getActivity().finish();
             }
         });
