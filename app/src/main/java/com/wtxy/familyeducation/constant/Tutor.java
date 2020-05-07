@@ -21,5 +21,5 @@ public class Tutor {
     /**
      *  管理员
      */
-    public static final int TYPE_MANAGER = 4;
+    public static final int TYPE_MANAGER = 0;
 }

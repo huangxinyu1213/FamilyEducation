@@ -13,6 +13,7 @@ import com.wtxy.familyeducation.iview.ILoginView;
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.constant.Tutor;
 import com.wtxy.familyeducation.presenter.LoginPresenter;
+import com.wtxy.familyeducation.util.ToastUtil;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
     private int mLoginType;
@@ -37,10 +38,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         switch (view.getId()) {
             case R.id.btn_login:
                 mPresenter.login(mLoginType, TextUtils.isEmpty(edtName.getText()) ? "测试" : edtName.getText().toString());
-                Intent intent1 = new Intent(this, HomeActivity.class);
-                startActivity(intent1);
-                //todo 跳转后暂时先直接finish
-                finish();
                 break;
             case R.id.regist:
                 Intent intent = new Intent(this, RegistActivity.class);
@@ -97,7 +94,9 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void gotoHomeActivity() {
-
+        Intent intent1 = new Intent(this, HomeActivity.class);
+        startActivity(intent1);
+        finish();
     }
 
     @Override
@@ -122,6 +121,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void showToast(String msg) {
-
+        ToastUtil.showShortToast(this,msg);
     }
 }
