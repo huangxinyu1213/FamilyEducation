@@ -61,6 +61,8 @@ public class LoginPresenter {
             if (result != null && result.isSuccess()) {
                 //登录成功
                 SPUtils.put(view.getContext(), Const.KEY_LOGIN_ID, result.getResult().account_id);
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_NAME, result.getResult().account_number);
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_TYPE, result.getResult().account_type);
                 SPUtils.put(view.getContext(), Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_SUCCESS);
                 if (view != null){
                     view.gotoHomeActivity();

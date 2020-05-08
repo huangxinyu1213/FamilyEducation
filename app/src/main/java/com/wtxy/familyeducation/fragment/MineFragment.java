@@ -59,6 +59,7 @@ public class MineFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                UserInfoManager.getInstance().loginOut(getActivity());
                 getActivity().startActivity(intent);
                 getActivity().finish();
             }

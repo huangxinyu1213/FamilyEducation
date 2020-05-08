@@ -7,6 +7,7 @@ package com.wtxy.familyeducation.constant;
  */
 public class Const {
     public static final String KEY_LOGIN_ID = "loginid";
+    public static final String KEY_LOGIN_NAME = "loginname";
     public static final String KEY_LOGIN_STATE = "loginstate";
     public static final String KEY_LOGIN_TYPE = "logintype";
     public static final String KEY_MANAGE_TYPE = "manage_type";
