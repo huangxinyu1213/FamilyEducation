@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FamilyEducation</string>
+    <string name="app_name">家教互动</string>
     <string name="app_title">家教互动平台</string>
     <string name="teach_entrance">教师入口</string>
     <string name="student_entrance">学生入口</string>
