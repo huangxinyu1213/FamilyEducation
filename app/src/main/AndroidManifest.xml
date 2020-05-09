@@ -36,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GradeInfoActivity" />
+        <activity android:name=".activity.ExamInfoActivity" />
         <activity android:name=".activity.HomeworkInfoActivity" />
         <activity android:name=".activity.ChoiceClassActivity" />
         <activity android:name=".activity.StudentHomeworkDetailActivity"/>
