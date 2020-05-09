@@ -1,9 +1,10 @@
 package com.wtxy.familyeducation.presenter;
 
-import com.wtxy.familyeducation.bean.EducationManageInfo;
+import com.wtxy.familyeducation.httpresult.LoadStudentScoreListHttpResult;
 import com.wtxy.familyeducation.iview.IStudentListView;
-import com.wtxy.familyeducation.user.GradeInfo;
+import com.wtxy.familyeducation.task.LoadStudentScoreListTask;
 import com.wtxy.familyeducation.user.HomeworkInfo;
+import com.zhy.http.okhttp.requestBase.TaskListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,33 +18,28 @@ public class StudentListPresenter {
     }
 
 
-    public void loadStudentGradeData() {
-        getTestGradeData();
+    public void loadStudentGradeData(int studentId) {
+        LoadStudentScoreListTask loadStudentScoreListTask = new LoadStudentScoreListTask(new TaskListener<LoadStudentScoreListHttpResult>() {
+            @Override
+            public void onTaskStart(TaskListener<LoadStudentScoreListHttpResult> listener) {
+
+            }
+
+            @Override
+            public void onTaskComplete(TaskListener<LoadStudentScoreListHttpResult> listener, LoadStudentScoreListHttpResult result, Exception e) {
+                if (result != null && result.isSuccess()) {
+                    if (studentListView != null) {
+                        studentListView.refreshGrandList(result.getResult());
+                    }
+                }
+            }
+        }, LoadStudentScoreListHttpResult.class);
+        loadStudentScoreListTask.setStudentId(studentId);
+        loadStudentScoreListTask.execute();
     }
 
     public void loadStudentHomewordData() {
         getTestHomeworkDate();
-    }
-
-    private void getTestGradeData() {
-        List<GradeInfo> list = new ArrayList<>();
-        GradeInfo gradeInfo1 = new GradeInfo();
-        gradeInfo1.grade_id = 100001;
-        gradeInfo1.grade_college = "计算机院";
-        gradeInfo1.grade_name = "2019年上学期计算机考试成绩";
-        gradeInfo1.grade_score = 89.5f;
-        gradeInfo1.grade_time = "2019-5-10";
-        list.add(gradeInfo1);
-        GradeInfo gradeInfo2 = new GradeInfo();
-        gradeInfo2.grade_id = 100002;
-        gradeInfo2.grade_college = "计算机院";
-        gradeInfo2.grade_name = "2019年上学期高等数学考试成绩";
-        gradeInfo2.grade_score = 70f;
-        gradeInfo2.grade_time = "2019-5-18";
-        list.add(gradeInfo2);
-        if (studentListView != null) {
-            studentListView.refreshGrandList(list);
-        }
     }
 
     private void getTestHomeworkDate() {

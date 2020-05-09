@@ -10,6 +10,7 @@ public class Const {
     public static final String KEY_LOGIN_NAME = "loginname";
     public static final String KEY_LOGIN_STATE = "loginstate";
     public static final String KEY_LOGIN_TYPE = "logintype";
+    public static final String KEY_LOGIN_RESULT_INFO = "login_result_info";
     public static final String KEY_MANAGE_TYPE = "manage_type";
     public static final String KEY_MANAGE_INFO = "manage_info";
     public static final String KEY_TEACHER_INFO = "teacher_info";
