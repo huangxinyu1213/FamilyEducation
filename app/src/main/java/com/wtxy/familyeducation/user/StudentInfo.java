@@ -13,6 +13,9 @@ public class StudentInfo extends BaseItemBean {
     public String student_gender;
     public String class_id;
     public String student_account;
+    public String parent_name;
+    public String parent_account;
+    public String parent_relation;
 
     @Override
     public String toString() {
