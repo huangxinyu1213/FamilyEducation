@@ -15,7 +15,7 @@ import com.wtxy.familyeducation.user.UserInfo;
 import com.wtxy.familyeducation.user.UserInfoManager;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/25
  * @Describe: 我的
  */

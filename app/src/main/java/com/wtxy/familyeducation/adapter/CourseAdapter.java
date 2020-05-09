@@ -9,7 +9,7 @@ import com.wtxy.familyeducation.bean.CourseInfo;
 import java.util.List;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/5/9
  * @Describe:
  */

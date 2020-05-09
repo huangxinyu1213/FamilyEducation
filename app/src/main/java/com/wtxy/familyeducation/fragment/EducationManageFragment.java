@@ -26,7 +26,7 @@ import com.wtxy.familyeducation.user.UserInfoManager;
 import java.util.List;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/25
  * @Describe: 教务管理
  */
