@@ -1,6 +1,7 @@
 package com.wtxy.familyeducation.activity;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -52,6 +53,21 @@ public class ClassInfoActivity extends BaseActivity {
             }
         });
         showTitle(classInfo.getShowTitle());
+        showRightBtn("新增学生");
+        loadStudent();
+    }
+
+    @Override
+    public void onRightBtnClick() {
+        super.onRightBtnClick();
+        Intent intent = new Intent(this,StudentInfoActivity.class);
+        intent.putExtra(Const.KEY_CLASS_ID,classInfo.getClass_id());
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         loadStudent();
     }
 
