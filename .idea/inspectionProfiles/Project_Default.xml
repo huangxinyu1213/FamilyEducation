@@ -111,6 +111,7 @@
     <inspection_tool class="JdPojoNoDefaultValue" enabled="false" level="MAJOR " enabled_by_default="false" />
     <inspection_tool class="JdRemoveCommentedCode" enabled="false" level="MAJOR " enabled_by_default="false" />
     <inspection_tool class="JdServiceOrDaoClassShouldEndWithImpl" enabled="false" level="CRITICAL " enabled_by_default="false" />
+    <inspection_tool class="JdSettlementThread" enabled="false" level="WARNING " enabled_by_default="false" />
     <inspection_tool class="JdSwitchStatement" enabled="false" level="CRITICAL " enabled_by_default="false" />
     <inspection_tool class="JdTestClassShouldEndWithTestNaming" enabled="false" level="MAJOR " enabled_by_default="false" />
     <inspection_tool class="JdThreadLocalShouldRemove" enabled="false" level="CRITICAL " enabled_by_default="false" />

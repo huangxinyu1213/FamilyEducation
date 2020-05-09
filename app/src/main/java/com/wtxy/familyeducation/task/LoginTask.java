@@ -2,12 +2,13 @@ package com.wtxy.familyeducation.task;
 
 import com.wtxy.familyeducation.httpresult.LoginHttpResult;
 import com.wtxy.familyeducation.net.FamilyEduHttpRequest;
+import com.wtxy.familyeducation.util.MD5Util;
 import com.zhy.http.okhttp.requestBase.TaskListener;
 
 import java.util.HashMap;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/23
  * @Describe:
  */
@@ -34,7 +35,7 @@ public class LoginTask extends FamilyEduHttpRequest<LoginHttpResult> {
     @Override
     protected void addParam(HashMap<String, String> params) {
        params.put("account_number",loginName);
-       params.put("account_password",loginPwd);
+       params.put("account_password", MD5Util.createMD5String(loginPwd));
        params.put("account_type",String.valueOf(loginType));
     }
 

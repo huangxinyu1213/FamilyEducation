@@ -3,7 +3,7 @@ package com.wtxy.familyeducation.bean;
 import java.io.Serializable;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/11
  * @Describe:
  */

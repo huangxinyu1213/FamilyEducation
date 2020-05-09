@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.wtxy.familyeducation.bean.BaseItemBean;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/11
  * @Describe:
  */
