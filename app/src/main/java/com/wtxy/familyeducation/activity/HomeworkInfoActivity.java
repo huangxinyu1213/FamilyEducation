@@ -11,17 +11,25 @@ import android.widget.TextView;
 
 import com.wtxy.familyeducation.BaseActivity;
 import com.wtxy.familyeducation.R;
+import com.wtxy.familyeducation.bean.HomeWorkInfo;
+import com.wtxy.familyeducation.iview.IHomeWorkInfoView;
+import com.wtxy.familyeducation.presenter.AddOrUpdateHomeWorkInfoPresenter;
 import com.wtxy.familyeducation.user.HomeworkInfo;
 
-public class HomeworkInfoActivity extends BaseActivity {
+import java.util.Date;
+
+public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoView {
     private EditText edtTitle;
     private EditText edtSubTitle;
     private TextView tvClass;
     private RelativeLayout rl_check_class;
 
-    private HomeworkInfo mHomeworkInfo;
+    private HomeWorkInfo mHomeworkInfo;
+    private AddOrUpdateHomeWorkInfoPresenter presenter;
+    private boolean isAdd;
+    private int classId;
 
-    public static Intent newIntent(Context context, HomeworkInfo homeworkInfo) {
+    public static Intent newIntent(Context context, HomeWorkInfo homeworkInfo) {
         Intent intent = new Intent(context, HomeworkInfoActivity.class);
         intent.putExtra("HomeworkInfo", homeworkInfo);
         return intent;
@@ -31,7 +39,12 @@ public class HomeworkInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_homework_info);
         super.onCreate(savedInstanceState);
-        mHomeworkInfo = (HomeworkInfo) getIntent().getSerializableExtra("HomeworkInfo");
+        presenter = new AddOrUpdateHomeWorkInfoPresenter(this);
+        mHomeworkInfo = (HomeWorkInfo) getIntent().getSerializableExtra("HomeworkInfo");
+        isAdd = mHomeworkInfo == null;
+        if (mHomeworkInfo != null) {
+            classId = mHomeworkInfo.getClass_id();
+        }
         showTitle("作业详情");
         showRightBtn("保存");
         edtTitle = findViewById(R.id.edtTitle);
@@ -46,8 +59,8 @@ public class HomeworkInfoActivity extends BaseActivity {
             }
         });
         if (mHomeworkInfo != null) {
-            edtTitle.setText(mHomeworkInfo.homeword_name);
-            edtSubTitle.setText(mHomeworkInfo.homeword_desc);
+            edtTitle.setText(mHomeworkInfo.getHw_title());
+            edtSubTitle.setText(mHomeworkInfo.getHw_detail());
         }
     }
 
@@ -56,6 +69,7 @@ public class HomeworkInfoActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == 1000) {
             String className = data.getStringExtra("class_name");
+            classId = data.getIntExtra("class_id",0);
             tvClass.setText(className);
         }
     }
@@ -64,14 +78,47 @@ public class HomeworkInfoActivity extends BaseActivity {
     public void onRightBtnClick() {
         super.onRightBtnClick();
         if (mHomeworkInfo == null) {
-            mHomeworkInfo = new HomeworkInfo();
+            mHomeworkInfo = new HomeWorkInfo();
         }
-        mHomeworkInfo.homeword_name = edtTitle.getText().toString().trim();
-        mHomeworkInfo.homeword_desc = edtSubTitle.getText().toString().trim();
-        Intent intent = new Intent();
-        intent.putExtra("HomeworkInfo", mHomeworkInfo);
-        setResult(300, intent);
-        finish();
+        mHomeworkInfo.setHw_title(edtTitle.getText().toString().trim());
+        mHomeworkInfo.setHw_detail(edtSubTitle.getText().toString().trim());
+        mHomeworkInfo.setHw_date(new Date().toString());
+        mHomeworkInfo.setClass_id(classId);
+//        Intent intent = new Intent();
+//        intent.putExtra("HomeworkInfo", mHomeworkInfo);
+//        setResult(300, intent);
+//        finish();
+        presenter.addOrUpdateHomeWorkInfo(isAdd);
     }
 
+    @Override
+    public void modifySuccess() {
+        this.setResult(300);
+        this.finish();
+    }
+
+    @Override
+    public HomeWorkInfo getHomeWorkInfo() {
+        return this.mHomeworkInfo;
+    }
+
+    @Override
+    public Context getContext() {
+        return null;
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

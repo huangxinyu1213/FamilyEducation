@@ -81,7 +81,7 @@ public class TeacherInfoActivity extends BaseActivity implements ITeacherInfoVie
     @Override
     public void modifySuccess() {
         this.setResult(1);
-       this.finish();
+        this.finish();
     }
 
     @Override

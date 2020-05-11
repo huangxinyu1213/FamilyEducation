@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.bean.BaseItemBean;
+import com.wtxy.familyeducation.bean.HomeWorkInfo;
 import com.wtxy.familyeducation.user.GradeInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
 
@@ -30,12 +31,12 @@ public class GradeListAdapter<T extends BaseItemBean> extends CommonAdapter<Base
             ((TextView) helper.getView(R.id.tv_title)).setText(gradeInfo.grade_name);
             ((TextView) helper.getView(R.id.tv_college)).setText(gradeInfo.grade_college);
             helper.getView(R.id.tv_time).setVisibility(View.GONE);
-        } else if (item instanceof HomeworkInfo) {
-            HomeworkInfo homeworkInfo = (HomeworkInfo) item;
-            ((TextView) helper.getView(R.id.tv_title)).setText(homeworkInfo.homeword_name);
-            ((TextView) helper.getView(R.id.tv_college)).setText(homeworkInfo.homeword_desc);
+        } else if (item instanceof HomeWorkInfo) {
+            HomeWorkInfo homeworkInfo = (HomeWorkInfo) item;
+            ((TextView) helper.getView(R.id.tv_title)).setText(homeworkInfo.getHw_title());
+            ((TextView) helper.getView(R.id.tv_college)).setText(homeworkInfo.getHw_detail());
             helper.getView(R.id.tv_time).setVisibility(View.VISIBLE);
-            ((TextView) helper.getView(R.id.tv_time)).setText(homeworkInfo.homeword_time);
+            ((TextView) helper.getView(R.id.tv_time)).setText(homeworkInfo.getHw_date());
         }
 
     }
