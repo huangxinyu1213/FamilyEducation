@@ -41,7 +41,7 @@ public class EducationManagerFactory {
      */
     private static List<EducationManageInfo> createTeacherManageInfo(int userType) {
         List<EducationManageInfo> list = new ArrayList<>();
-        list.add(new EducationManageInfo(userType,EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE,"成绩管理"));
+        list.add(new EducationManageInfo(userType,EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE,"考试管理"));
         list.add(new EducationManageInfo(userType,EducationManageInfo.MANAGE_TYPE_MANAGER_HOMEWORK,"作业管理"));
         return list;
     }

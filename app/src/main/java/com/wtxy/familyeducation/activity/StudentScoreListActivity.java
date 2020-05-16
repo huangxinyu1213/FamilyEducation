@@ -1,5 +1,6 @@
 package com.wtxy.familyeducation.activity;
 
+import android.app.UiModeManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +12,14 @@ import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.adapter.StudentGradeListAdapter;
 import com.wtxy.familyeducation.bean.BaseItemBean;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
+import com.wtxy.familyeducation.bean.ScoreInfo;
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.iview.IStudentListView;
 import com.wtxy.familyeducation.presenter.StudentListPresenter;
 import com.wtxy.familyeducation.user.GradeInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
+import com.wtxy.familyeducation.user.UserInfo;
+import com.wtxy.familyeducation.user.UserInfoManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +45,16 @@ public class StudentScoreListActivity extends BaseActivity implements IStudentLi
         EducationManageInfo educationManageInfo = (EducationManageInfo) getIntent().getSerializableExtra(Const.KEY_MANAGE_INFO);
         studentListPresenter = new StudentListPresenter(this);
         if (educationManageInfo != null) {
-            studentListPresenter.loadStudentGradeData();
+            UserInfo userInfo = UserInfoManager.getInstance().getCurrentUserInfo();
+            if (userInfo != null && userInfo.getStudentInfo() != null) {
+                studentListPresenter.loadStudentGradeData(userInfo.getStudentInfo().student_id);
+            }
             showTitle(educationManageInfo.getTitle());
         }
     }
 
     @Override
-    public void refreshGrandList(List<GradeInfo> gradeInfos) {
+    public void refreshGrandList(List<ScoreInfo> gradeInfos) {
         mData.clear();
         mData.addAll(gradeInfos);
         mAdapter.notifyDataSetChanged();

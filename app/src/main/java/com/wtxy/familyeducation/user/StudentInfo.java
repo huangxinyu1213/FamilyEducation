@@ -1,6 +1,7 @@
 package com.wtxy.familyeducation.user;
 
 import com.wtxy.familyeducation.bean.BaseItemBean;
+import com.wtxy.familyeducation.bean.ScoreInfo;
 
 /**
  * @Author: yiwenhui
@@ -17,6 +18,7 @@ public class StudentInfo extends BaseItemBean {
     public String parent_account;
     public String parent_relation;
 
+    public ScoreInfo scoreInfo;
     @Override
     public String toString() {
         return "StudentInfo{" +

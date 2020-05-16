@@ -10,19 +10,14 @@ import android.widget.ListView;
 
 import com.wtxy.familyeducation.BaseActivity;
 import com.wtxy.familyeducation.R;
-import com.wtxy.familyeducation.adapter.CommonListAdapter;
 import com.wtxy.familyeducation.adapter.GradeListAdapter;
 import com.wtxy.familyeducation.bean.BaseItemBean;
-import com.wtxy.familyeducation.bean.ClassInfo;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
-import com.wtxy.familyeducation.bean.SubjectInfo;
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.iview.ITeacherListView;
-import com.wtxy.familyeducation.presenter.ManageListPresenter;
 import com.wtxy.familyeducation.presenter.TeacherListPresenter;
-import com.wtxy.familyeducation.user.GradeInfo;
+import com.wtxy.familyeducation.user.ExamInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
-import com.wtxy.familyeducation.user.TeachInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +59,8 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
 
     private void goToItemActivity(BaseItemBean itemBean) {
         Intent intent = null;
-        if (itemBean instanceof GradeInfo) {
-            intent = GradeInfoActivity.newIntent(this, (GradeInfo) itemBean);
+        if (itemBean instanceof ExamInfo) {
+            intent = ExamInfoActivity.newIntent(this, (ExamInfo) itemBean);
         } else if (itemBean instanceof HomeworkInfo) {
             intent = HomeworkInfoActivity.newIntent(this, (HomeworkInfo) itemBean);
         }
@@ -73,7 +68,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
     }
 
     @Override
-    public void refreshGrandList(List<GradeInfo> gradeInfos) {
+    public void refreshGrandList(List<ExamInfo> gradeInfos) {
         showRightBtn("新增");
         mData.clear();
         mData.addAll(gradeInfos);
@@ -93,7 +88,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
         super.onActivityResult(requestCode, resultCode, data);
         if (manageType == EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE) {
             if (resultCode == 300) {
-                GradeInfo gradeInfo = (GradeInfo) data.getSerializableExtra("GradeInfo");
+                ExamInfo gradeInfo = (ExamInfo) data.getSerializableExtra("GradeInfo");
                 if (gradeInfo != null) {
                     if (!checkGradeInfoData(gradeInfo)) {
                         mData.add(gradeInfo);
@@ -114,11 +109,12 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
         }
     }
 
-    private boolean checkGradeInfoData(GradeInfo gradeInfo) {
+    private boolean checkGradeInfoData(ExamInfo gradeInfo) {
         for (BaseItemBean bean : mData) {
-            if (((GradeInfo) bean).grade_id == gradeInfo.grade_id) {
-                ((GradeInfo) bean).grade_name = gradeInfo.grade_name;
-                ((GradeInfo) bean).grade_college = gradeInfo.grade_college;
+            if (((ExamInfo) bean).exam_id == gradeInfo.exam_id) {
+                ((ExamInfo) bean).exam_name = gradeInfo.exam_name;
+                ((ExamInfo) bean).subject_name = gradeInfo.subject_name;
+                ((ExamInfo) bean).class_name = gradeInfo.class_name;
                 return true;
             }
         }
@@ -141,7 +137,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
     public void onRightBtnClick() {
         super.onRightBtnClick();
         if (manageType == EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE) {
-            Intent intent = GradeInfoActivity.newIntent(this, null);
+            Intent intent = ExamInfoActivity.newIntent(this, null);
             startActivityForResult(intent, 1);
         } else if (manageType == EducationManageInfo.MANAGE_TYPE_MANAGER_HOMEWORK) {
             Intent intent = HomeworkInfoActivity.newIntent(this, null);

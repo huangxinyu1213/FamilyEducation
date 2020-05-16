@@ -3,6 +3,8 @@ package com.wtxy.familyeducation.presenter;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.wtxy.familyeducation.bean.LoginResultInfo;
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.constant.LoginStateUtil;
 import com.wtxy.familyeducation.constant.Tutor;
@@ -33,19 +35,19 @@ public class LoginPresenter {
         this.view = (ILoginView) view;
     }
 
-    public void login(int loginType,String name) {
+    public void login(int loginType, String name) {
 
-        if (view instanceof ILoginView){
-           ILoginView loginView = (ILoginView) view;
-            if (TextUtils.isEmpty(loginView.getCount())){
+        if (view instanceof ILoginView) {
+            ILoginView loginView = (ILoginView) view;
+            if (TextUtils.isEmpty(loginView.getCount())) {
                 loginView.showToast("账户不能为空");
                 return;
             }
-            if (TextUtils.isEmpty(loginView.getPwd())){
+            if (TextUtils.isEmpty(loginView.getPwd())) {
                 loginView.showToast("密码不能为空");
                 return;
             }
-            loginBiz.login(loginView.getLoginType(),loginView.getCount(),loginView.getPwd(),taskListener);
+            loginBiz.login(loginView.getLoginType(), loginView.getCount(), loginView.getPwd(), taskListener);
         }
     }
 
@@ -64,14 +66,17 @@ public class LoginPresenter {
                 SPUtils.put(view.getContext(), Const.KEY_LOGIN_NAME, result.getResult().account_number);
                 SPUtils.put(view.getContext(), Const.KEY_LOGIN_TYPE, result.getResult().account_type);
                 SPUtils.put(view.getContext(), Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_SUCCESS);
-                if (view != null){
+                if (view != null) {
                     view.gotoHomeActivity();
                     view.showToast("登录成功");
                 }
-                saveUserInfo(Integer.parseInt(result.getResult().account_type),result.getResult().account_number);
+                Gson gson = new Gson();
+                String resultStr = gson.toJson(result.getResult());
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_RESULT_INFO, resultStr);
+                saveUserInfo(Integer.parseInt(result.getResult().account_type), result.getResult());
             } else {
                 //登录失败
-                if (view != null){
+                if (view != null) {
                     view.showToast("登录失败");
                 }
                 SPUtils.put(view.getContext(), Const.KEY_LOGIN_STATE, LoginStateUtil.LOGIN_FAILD);
@@ -79,11 +84,11 @@ public class LoginPresenter {
         }
     };
 
-    private void saveUserInfo(int loginType,String name){
-                switch (loginType) {
+    private void saveUserInfo(int loginType, LoginResultInfo loginResultInfo) {
+        switch (loginType) {
             case Tutor.TYPE_TEACHER:
                 TeachInfo teachInfo = new TeachInfo();
-                teachInfo.teacher_name = name;
+                teachInfo.teacher_name = loginResultInfo.account_number;
                 UserInfoManager.getInstance().getCurrentUserInfo().setTeachInfo(teachInfo);
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_TEACHER);
                 break;
@@ -92,14 +97,12 @@ public class LoginPresenter {
                 break;
             case Tutor.TYPE_PARENT:
                 ParentInfo parentInfo = new ParentInfo();
-                parentInfo.parent_name = name;
+                parentInfo.parent_name = loginResultInfo.account_number;
                 UserInfoManager.getInstance().getCurrentUserInfo().setParentInfo(parentInfo);
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_PARENT);
                 break;
             case Tutor.TYPE_STUDENT:
-                StudentInfo studentInfo = new StudentInfo();
-                studentInfo.student_name = name;
-                UserInfoManager.getInstance().getCurrentUserInfo().setStudentInfo(studentInfo);
+                UserInfoManager.getInstance().getCurrentUserInfo().setStudentInfo(loginResultInfo.student_info);
                 UserInfoManager.getInstance().getCurrentUserInfo().setCurrentUserType(UserInfo.ACCOUNT_TYPE_STUDENT);
                 break;
             default:
