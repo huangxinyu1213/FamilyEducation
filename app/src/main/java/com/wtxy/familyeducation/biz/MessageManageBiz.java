@@ -8,7 +8,7 @@ import com.wtxy.familyeducation.task.LoadNoticesTask;
 import com.zhy.http.okhttp.requestBase.TaskListener;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/26
  * @Describe:
  */

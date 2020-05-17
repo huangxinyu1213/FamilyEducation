@@ -15,7 +15,7 @@ import com.wtxy.familyeducation.user.UserInfo;
 import com.wtxy.familyeducation.user.UserInfoManager;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/25
  * @Describe: 我的
  */
@@ -59,6 +59,7 @@ public class MineFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                UserInfoManager.getInstance().loginOut(getActivity());
                 getActivity().startActivity(intent);
                 getActivity().finish();
             }

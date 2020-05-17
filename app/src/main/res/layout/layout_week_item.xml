@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <TextView
+       android:id="@+id/week_day"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center"
+       android:textSize="15sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="15dp"
+       android:text="周一"
+       android:textColor="@color/common_black"
+       android:background="@drawable/week_selector"/>
+</RelativeLayout>

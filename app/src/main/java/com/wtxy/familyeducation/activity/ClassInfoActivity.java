@@ -1,10 +1,14 @@
 package com.wtxy.familyeducation.activity;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wtxy.familyeducation.BaseActivity;
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.adapter.CommonListAdapter;
 import com.wtxy.familyeducation.bean.ClassInfo;
@@ -20,22 +24,50 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassInfoActivity extends AppCompatActivity {
+public class ClassInfoActivity extends BaseActivity {
     private TextView tvClassName;
     private ListView listview;
     private ClassInfo classInfo;
     private CommonListAdapter commonListAdapter;
-    private List<StudentInfo> studentInfos;
+    private List<StudentInfo> studentInfos = new ArrayList<>();
+    private View classTable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_info);
+        super.onCreate(savedInstanceState);
         tvClassName = findViewById(R.id.tv_content);
         listview = findViewById(R.id.listview);
         classInfo = (ClassInfo) getIntent().getSerializableExtra(Const.KEY_CLASS_INFO);
-        if (classInfo != null){
-            tvClassName.setText(classInfo.getClass_name());
+        if (classInfo == null){
+            return;
         }
+        tvClassName.setText(classInfo.getClass_name());
+        classTable = findViewById(R.id.class_table);
+        classTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClassInfoActivity.this,ClassTableActivity.class);
+                intent.putExtra(Const.KEY_CLASS_ID,classInfo.getClass_id());
+                intent.putExtra(Const.KEY_CLASS_NAME,classInfo.getClass_name());
+                startActivity(intent);
+            }
+        });
+        showTitle(classInfo.getShowTitle());
+        showRightBtn("新增学生");
+        loadStudent();
+    }
+
+    @Override
+    public void onRightBtnClick() {
+        super.onRightBtnClick();
+        Intent intent = new Intent(this,StudentInfoActivity.class);
+        intent.putExtra(Const.KEY_CLASS_ID,classInfo.getClass_id());
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         loadStudent();
     }
 
@@ -49,17 +81,17 @@ public class ClassInfoActivity extends AppCompatActivity {
             @Override
             public void onTaskComplete(TaskListener<LoadStudentListHttpResult> listener, LoadStudentListHttpResult result, Exception e) {
                  if (result != null && result.isSuccess()){
-                     //if (result.getResult() != null && !result.getResult().isEmpty()){
+                     if (result.getResult() != null && !result.getResult().isEmpty()){
                          studentInfos.clear();
-                    //studentInfos.addAll(result.getResult());
-                     studentInfos = getTestInfo();
+                         studentInfos.addAll(result.getResult());
+                     //studentInfos = getTestInfo();
                      if (commonListAdapter == null) {
                              commonListAdapter = new CommonListAdapter(ClassInfoActivity.this, studentInfos, R.layout.common_list_item);
                              listview.setAdapter(commonListAdapter);
                          }else {
                              commonListAdapter.notifyDataSetChanged();
                          }
-                     //}
+                     }
                  }
             }
         }, LoadStudentListHttpResult.class);

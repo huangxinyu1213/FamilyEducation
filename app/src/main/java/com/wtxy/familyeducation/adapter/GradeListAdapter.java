@@ -6,13 +6,13 @@ import android.widget.TextView;
 
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.bean.BaseItemBean;
-import com.wtxy.familyeducation.user.GradeInfo;
+import com.wtxy.familyeducation.user.ExamInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
 
 import java.util.List;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/11
  * @Describe:
  */
@@ -25,10 +25,10 @@ public class GradeListAdapter<T extends BaseItemBean> extends CommonAdapter<Base
 
     @Override
     public void convert(ViewHolder helper, BaseItemBean item, int postion) {
-        if (item instanceof GradeInfo) {
-            GradeInfo gradeInfo = (GradeInfo) item;
-            ((TextView) helper.getView(R.id.tv_title)).setText(gradeInfo.grade_name);
-            ((TextView) helper.getView(R.id.tv_college)).setText(gradeInfo.grade_college);
+        if (item instanceof ExamInfo) {
+            ExamInfo gradeInfo = (ExamInfo) item;
+            ((TextView) helper.getView(R.id.tv_title)).setText(gradeInfo.exam_name);
+            ((TextView) helper.getView(R.id.tv_college)).setText(gradeInfo.class_name + " " + gradeInfo.subject_name);
             helper.getView(R.id.tv_time).setVisibility(View.GONE);
         } else if (item instanceof HomeworkInfo) {
             HomeworkInfo homeworkInfo = (HomeworkInfo) item;

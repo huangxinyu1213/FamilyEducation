@@ -1,20 +1,24 @@
 package com.wtxy.familyeducation.constant;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/24
  * @Describe:
  */
 public class Const {
     public static final String KEY_LOGIN_ID = "loginid";
+    public static final String KEY_LOGIN_NAME = "loginname";
     public static final String KEY_LOGIN_STATE = "loginstate";
     public static final String KEY_LOGIN_TYPE = "logintype";
+    public static final String KEY_LOGIN_RESULT_INFO = "login_result_info";
     public static final String KEY_MANAGE_TYPE = "manage_type";
     public static final String KEY_MANAGE_INFO = "manage_info";
     public static final String KEY_TEACHER_INFO = "teacher_info";
     public static final String KEY_IS_SELECT = "isSelect";
     public static final String KEY_SUBJECT_INFO = "subject_info";
     public static final String KEY_CLASS_INFO = "class_info";
+    public static final String KEY_CLASS_ID = "class_id";
+    public static final String KEY_CLASS_NAME = "class_name";
     /**
      *  信息管理
      */

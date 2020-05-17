@@ -3,7 +3,7 @@ package com.wtxy.familyeducation.util;
 import android.content.Context;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/12
  * @Describe:
  */

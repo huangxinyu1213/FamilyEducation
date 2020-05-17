@@ -13,6 +13,7 @@ import com.wtxy.familyeducation.adapter.GradeListAdapter;
 import com.wtxy.familyeducation.adapter.StudentGradeListAdapter;
 import com.wtxy.familyeducation.bean.BaseItemBean;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
+import com.wtxy.familyeducation.bean.ScoreInfo;
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.iview.IStudentListView;
 import com.wtxy.familyeducation.presenter.StudentListPresenter;
@@ -63,7 +64,7 @@ public class StudentHomeworkListActivity extends BaseActivity implements IStuden
     }
 
     @Override
-    public void refreshGrandList(List<GradeInfo> gradeInfos) {
+    public void refreshGrandList(List<ScoreInfo> gradeInfos) {
     }
 
     @Override

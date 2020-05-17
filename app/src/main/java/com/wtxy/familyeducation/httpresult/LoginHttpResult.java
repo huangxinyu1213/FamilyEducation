@@ -4,7 +4,7 @@ import com.wtxy.familyeducation.bean.LoginResultInfo;
 import com.zhy.http.okhttp.requestBase.HttpResult;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/23
  * @Describe:
  */

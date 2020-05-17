@@ -10,6 +10,10 @@ import com.wtxy.familyeducation.BaseActivity;
 import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.adapter.CommonListAdapter;
 import com.wtxy.familyeducation.bean.ClassInfo;
+import com.wtxy.familyeducation.biz.ManageListBiz;
+import com.wtxy.familyeducation.httpresult.LoadClassListResult;
+import com.wtxy.familyeducation.ibiz.IManageListBiz;
+import com.zhy.http.okhttp.requestBase.TaskListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,23 +24,40 @@ public class ChoiceClassActivity extends BaseActivity {
     private CommonListAdapter mAdapter;
     private ListView listView;
 
+    private IManageListBiz manageListBiz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_choice_class);
         super.onCreate(savedInstanceState);
+        manageListBiz = new ManageListBiz();
         listView = findViewById(R.id.manage_content);
         classList = new ArrayList<>();
-        getTestClass();
+//        getTestClass();
         mAdapter = new CommonListAdapter(this, classList, R.layout.education_manage_item);
         listView.setAdapter(mAdapter);
         showTitle("班级选择");
+        manageListBiz.loadClassList(new TaskListener<LoadClassListResult>() {
+            @Override
+            public void onTaskStart(TaskListener<LoadClassListResult> listener) {
+
+            }
+
+            @Override
+            public void onTaskComplete(TaskListener<LoadClassListResult> listener, LoadClassListResult result, Exception e) {
+                if (result.isSuccess() && result != null) {
+                    classList.addAll(result.getResult());
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ClassInfo classInfo = classList.get(position);
                 Intent intent = new Intent();
-                intent.putExtra("class_name", classInfo.getClass_name());
-                setResult(1000, intent);
+                intent.putExtra("classInfo", classInfo);
+                setResult(2000, intent);
                 finish();
             }
         });

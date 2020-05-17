@@ -13,33 +13,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.ClassInfoActivity"/>
-        <activity android:name=".activity.SubjectListActivity"/>
-        <activity android:name=".activity.TeacherInfoActivity"/>
-        <activity android:name=".activity.StudentHomeworkListActivity"/>
-        <activity android:name=".activity.StudentScoreListActivity" />
-        <activity android:name=".activity.ManagerListManageActivity"/>
-        <activity android:name=".activity.TeacherManageListActivity"/>
-        <activity android:name=".home.PublishActivity"/>
-        <activity
-            android:name=".home.HomeActivity"
-            android:label="@string/title_activity_home"></activity>
-        <activity android:name=".BaseActivity"></activity>
-        <activity android:name=".login.RegistActivity"></activity>
-        <activity android:name=".login.LoginActivity"></activity>
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.StudentInfoActivity"></activity>
+        <activity android:name=".activity.ClassTableActivity"></activity>
+        <activity android:name=".home.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GradeInfoActivity" />
+        <activity android:name=".activity.ClassInfoActivity" />
+        <activity android:name=".activity.SubjectListActivity" />
+        <activity android:name=".activity.TeacherInfoActivity" />
+        <activity android:name=".activity.StudentHomeworkListActivity" />
+        <activity android:name=".activity.StudentScoreListActivity" />
+        <activity android:name=".activity.ManagerListManageActivity" />
+        <activity android:name=".activity.TeacherManageListActivity" />
+        <activity android:name=".home.PublishActivity" />
+        <activity
+            android:name=".home.HomeActivity"
+            android:label="@string/title_activity_home" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".login.RegistActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".activity.ExamInfoActivity" />
         <activity android:name=".activity.HomeworkInfoActivity" />
         <activity android:name=".activity.ChoiceClassActivity" />
-        <activity android:name=".activity.StudentHomeworkDetailActivity"/>
+        <activity android:name=".activity.StudentHomeworkDetailActivity" />
         <activity
             android:name=".web.WebActivity"
             android:screenOrientation="portrait" />

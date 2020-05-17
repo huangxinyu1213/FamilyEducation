@@ -1,7 +1,7 @@
 package com.wtxy.familyeducation.constant;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/23
  * @Describe:
  */
@@ -21,5 +21,5 @@ public class Tutor {
     /**
      *  管理员
      */
-    public static final int TYPE_MANAGER = 4;
+    public static final int TYPE_MANAGER = 0;
 }
