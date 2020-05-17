@@ -10,5 +10,5 @@ import com.zhy.http.okhttp.requestBase.TaskListener;
  */
 public interface IPubBiz {
     void pushLishNews(String title, String otherTitle, String link, TaskListener<HttpResult> taskListener);
-    void pushLishNotices(String title, String otherTitle, String link, TaskListener<HttpResult> taskListener);
+    void pushLishNotices(String title, String otherTitle, TaskListener<HttpResult> taskListener);
 }

@@ -197,12 +197,19 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
             @Override
             public void onBottomItemClick(BottomDialog dialog, View view) {
               dialog.dismiss();
+              Intent intent = new Intent(getActivity(), PublishActivity.class);
+              int requestCode = 0;
               switch (view.getId()){
                   case R.id.btn_pub_news:
-                      Intent intent = new Intent(getActivity(), PublishActivity.class);
-                      getActivity().startActivityForResult(intent, Const.REQUEST_PUB_NEWS);
+                      requestCode = Const.REQUEST_PUB_NEWS;
+                      intent.putExtra(Const.KEY_ISNEWS,true);
                       break;
-              }
+                  case R.id.btn_pub_notice:
+                      requestCode =  Const.REQUEST_PUB_NOTICE;
+                      intent.putExtra(Const.KEY_ISNEWS,false);
+                      break;
+                 }
+                getActivity().startActivityForResult(intent,requestCode);
             }
         });
         bottomDialog.show();
@@ -216,4 +223,16 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
         startActivity(intent);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.REQUEST_PUB_NEWS){
+            mPresenter.loadNews();
+            return;
+        }
+        if (requestCode == Const.REQUEST_PUB_NOTICE){
+            mPresenter.loadNotices();
+            return;
+        }
+    }
 }

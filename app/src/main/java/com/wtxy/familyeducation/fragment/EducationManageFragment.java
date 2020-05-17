@@ -52,6 +52,7 @@ public class EducationManageFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showTitle("教务管理");
+        view.findViewById(R.id.btn_back).setVisibility(View.GONE);
         mListView = view.findViewById(R.id.manage_content);
         final int userInfoType = UserInfoManager.getInstance().getCurrentUserInfo().getCurrentUserType();
         final List<EducationManageInfo> data = EducationManagerFactory.generateEducationInfo(userInfoType);

@@ -10,5 +10,6 @@ public interface IPublishView extends IView{
     String getPubTitle();
     String getOtherTitle();
     String getLink();
+    String getNoticeContent();
     void onPublishSuccess();
 }
