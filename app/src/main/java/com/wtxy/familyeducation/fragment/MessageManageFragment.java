@@ -20,9 +20,12 @@ import com.wtxy.familyeducation.adapter.NoticeAdapter;
 import com.wtxy.familyeducation.bean.News;
 import com.wtxy.familyeducation.bean.Notices;
 import com.wtxy.familyeducation.constant.Const;
+import com.wtxy.familyeducation.constant.LoginStateUtil;
 import com.wtxy.familyeducation.home.PublishActivity;
 import com.wtxy.familyeducation.iview.IMessageManageView;
 import com.wtxy.familyeducation.presenter.MessageManagePresenter;
+import com.wtxy.familyeducation.user.UserInfo;
+import com.wtxy.familyeducation.user.UserInfoManager;
 import com.wtxy.familyeducation.util.ToastUtil;
 import com.wtxy.familyeducation.view.BottomDialog;
 import com.wtxy.familyeducation.web.WebActivity;
@@ -121,7 +124,12 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
         btnNews.setOnClickListener(this);
         btnNotices.setOnClickListener(this);
         ImageView btnAdd = view.findViewById(R.id.add);
-        btnAdd.setOnClickListener(this);
+        if (UserInfoManager.getInstance().getCurrentUserInfo().getCurrentUserType() == UserInfo.ACCOUNT_TYPE_MANAGER) {
+             btnAdd.setVisibility(View.VISIBLE);
+             btnAdd.setOnClickListener(this);
+        }else {
+            btnAdd.setVisibility(View.GONE);
+        }
     }
 
     @Override
