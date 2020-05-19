@@ -1,14 +1,14 @@
 package com.wtxy.familyeducation.bean;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/11
  * @Describe:教务管理信息
  */
 public class EducationManageInfo extends BaseItemBean{
     //管理员教务管理类型
     public static final int MANAGE_TYPE_MANAGER_TEAHCER = 10;//教师管理
-    public static final int MANAGE_TYPE_MANAGER_CLASS = 11;//课程管理
+    public static final int MANAGE_TYPE_MANAGER_CLASS = 11;//班级管理
     public static final int MANAGE_TYPE_MANAGER_SUBJECT= 12;//科目管理
     //教师教务管理类型
     public static final int MANAGE_TYPE_TEAHCER_GRADE = 20;//成绩管理

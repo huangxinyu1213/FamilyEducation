@@ -54,6 +54,7 @@
                 android:background="@color/common_divider" />
 
             <RelativeLayout
+                android:id="@+id/rl_check_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/commend_padding"
@@ -61,24 +62,31 @@
                 android:paddingRight="@dimen/commend_padding"
                 android:paddingBottom="15dp">
 
+                <ImageView
+                    android:id="@+id/iv_next_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_next" />
+
                 <TextView
                     android:id="@+id/tv_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="副标题"
+                    android:text="选择科目"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/edtSubTitle"
+                <TextView
+                    android:id="@+id/tv_subject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/tv_subtitle"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/iv_next_one"
                     android:background="@null"
-                    android:gravity="right"
-                    android:hint="输入"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="" />
             </RelativeLayout>
 
             <View
@@ -135,10 +143,6 @@
                 android:paddingRight="@dimen/commend_padding"
                 android:paddingBottom="15dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/common_divider" />
         </LinearLayout>
     </ScrollView>
 

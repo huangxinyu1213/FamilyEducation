@@ -1,7 +1,7 @@
 package com.wtxy.familyeducation.bean;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/12
  * @Describe:
  */

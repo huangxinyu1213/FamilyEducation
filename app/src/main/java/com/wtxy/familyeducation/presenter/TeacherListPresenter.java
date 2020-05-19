@@ -1,11 +1,14 @@
 package com.wtxy.familyeducation.presenter;
 
 import com.wtxy.familyeducation.bean.EducationManageInfo;
+import com.wtxy.familyeducation.httpresult.LoadExamListResult;
+import com.wtxy.familyeducation.httpresult.LoadTeacherListResult;
 import com.wtxy.familyeducation.biz.HomeWorkBiz;
 import com.wtxy.familyeducation.httpresult.LoadHomeWorkListResult;
 import com.wtxy.familyeducation.ibiz.IHomeWorkBiz;
 import com.wtxy.familyeducation.iview.ITeacherListView;
 import com.wtxy.familyeducation.task.LoadHomeWorkListTask;
+import com.wtxy.familyeducation.task.LoadExamListTask;
 import com.wtxy.familyeducation.user.GradeInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
 import com.zhy.http.okhttp.requestBase.TaskListener;
@@ -26,7 +29,8 @@ public class TeacherListPresenter {
     public void loadData(int manageType) {
         switch (manageType) {
             case EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE:
-                getTestGradeData();
+                LoadExamListTask loadExamListTask = new LoadExamListTask(loadExamListResultTaskListener, LoadExamListResult.class);
+                loadExamListTask.execute();
                 break;
             case EducationManageInfo.MANAGE_TYPE_MANAGER_HOMEWORK:
                 getTestHomeworkDate();
@@ -34,21 +38,37 @@ public class TeacherListPresenter {
         }
     }
 
-    private void getTestGradeData() {
-        List<GradeInfo> list = new ArrayList<>();
-        GradeInfo gradeInfo1 = new GradeInfo();
-        gradeInfo1.grade_id = 100001;
-        gradeInfo1.grade_college = "计算机院";
-        gradeInfo1.grade_name = "2019年上学期计算机考试成绩";
-        list.add(gradeInfo1);
-        GradeInfo gradeInfo2 = new GradeInfo();
-        gradeInfo2.grade_id = 100002;
-        gradeInfo2.grade_college = "计算机院";
-        gradeInfo2.grade_name = "2019年上学期高等数学考试成绩";
-        list.add(gradeInfo2);
-        if (teacherListView != null) {
-            teacherListView.refreshGrandList(list);
+    private TaskListener<LoadExamListResult> loadExamListResultTaskListener = new TaskListener<LoadExamListResult>() {
+        @Override
+        public void onTaskStart(TaskListener<LoadExamListResult> listener) {
+
         }
+
+        @Override
+        public void onTaskComplete(TaskListener<LoadExamListResult> listener, LoadExamListResult result, Exception e) {
+            if (result != null && result.isSuccess()) {
+                if (teacherListView != null) {
+                    teacherListView.refreshGrandList(result.getResult());
+                }
+            }
+        }
+    };
+
+    private void getTestGradeData() {
+//        List<GradeInfo> list = new ArrayList<>();
+//        GradeInfo gradeInfo1 = new GradeInfo();
+//        gradeInfo1.grade_id = 100001;
+//        gradeInfo1.grade_college = "计算机院";
+//        gradeInfo1.grade_name = "2019年上学期计算机考试成绩";
+//        list.add(gradeInfo1);
+//        GradeInfo gradeInfo2 = new GradeInfo();
+//        gradeInfo2.grade_id = 100002;
+//        gradeInfo2.grade_college = "计算机院";
+//        gradeInfo2.grade_name = "2019年上学期高等数学考试成绩";
+//        list.add(gradeInfo2);
+//        if (teacherListView != null) {
+//            teacherListView.refreshGrandList(list);
+//        }
     }
 
     private TaskListener<LoadHomeWorkListResult> taskListener = new TaskListener<LoadHomeWorkListResult>() {

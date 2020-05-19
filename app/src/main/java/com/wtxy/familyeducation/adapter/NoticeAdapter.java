@@ -12,7 +12,7 @@ import com.wtxy.familyeducation.bean.Notices;
 import java.util.List;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/2/26
  * @Describe:
  */

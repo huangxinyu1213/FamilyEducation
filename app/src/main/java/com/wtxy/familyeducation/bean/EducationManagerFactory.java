@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author: maxiaohu
+ * @Author: yiwenhui
  * @Date: 2020/4/11
  * @Describe: 教务管理类
  */
@@ -41,7 +41,7 @@ public class EducationManagerFactory {
      */
     private static List<EducationManageInfo> createTeacherManageInfo(int userType) {
         List<EducationManageInfo> list = new ArrayList<>();
-        list.add(new EducationManageInfo(userType,EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE,"成绩管理"));
+        list.add(new EducationManageInfo(userType,EducationManageInfo.MANAGE_TYPE_TEAHCER_GRADE,"考试管理"));
         list.add(new EducationManageInfo(userType,EducationManageInfo.MANAGE_TYPE_MANAGER_HOMEWORK,"作业管理"));
         return list;
     }
