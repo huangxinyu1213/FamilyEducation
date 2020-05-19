@@ -19,6 +19,7 @@ public class Const {
     public static final String KEY_CLASS_INFO = "class_info";
     public static final String KEY_CLASS_ID = "class_id";
     public static final String KEY_CLASS_NAME = "class_name";
+    public static final String KEY_ISNEWS = "isnews";
     /**
      *  信息管理
      */
@@ -33,4 +34,7 @@ public class Const {
     public static final int PAGE_MINE = 3;
 
     public static final int REQUEST_PUB_NEWS = 101;
+
+    public static final int REQUEST_PUB_NOTICE = 102;
+
 }

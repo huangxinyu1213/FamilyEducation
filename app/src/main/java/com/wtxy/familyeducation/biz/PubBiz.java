@@ -2,6 +2,7 @@ package com.wtxy.familyeducation.biz;
 
 import com.wtxy.familyeducation.ibiz.IPubBiz;
 import com.wtxy.familyeducation.task.PublishNewsTask;
+import com.wtxy.familyeducation.task.PublishNoticeTask;
 import com.zhy.http.okhttp.requestBase.HttpResult;
 import com.zhy.http.okhttp.requestBase.TaskListener;
 
@@ -19,7 +20,9 @@ public class PubBiz implements IPubBiz {
     }
 
     @Override
-    public void pushLishNotices(String title, String otherTitle, String link, TaskListener<HttpResult> taskListener) {
-
+    public void pushLishNotices(String title, String otherTitle, TaskListener<HttpResult> taskListener) {
+        PublishNoticeTask publishNoticeTask = new PublishNoticeTask(taskListener,HttpResult.class);
+        publishNoticeTask.setParam(title,otherTitle);
+        publishNoticeTask.execute();
     }
 }

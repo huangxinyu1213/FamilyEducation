@@ -69,7 +69,11 @@
       <textMaps />
     </LinkMapSettings>
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+>>>>>>> e0de7fde19bdf52fe642a08ac3c22ca0e75cbfdc
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

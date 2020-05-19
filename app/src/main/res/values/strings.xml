@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">家教互动</string>
-    <string name="app_title">家教互动平台</string>
+    <string name="app_name">家校互动</string>
+    <string name="app_title">家校互动平台</string>
     <string name="teach_entrance">教师入口</string>
     <string name="student_entrance">学生入口</string>
     <string name="parent_entrance">家长入口</string>

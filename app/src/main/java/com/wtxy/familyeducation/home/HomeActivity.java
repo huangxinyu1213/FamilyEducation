@@ -1,7 +1,9 @@
 package com.wtxy.familyeducation.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
      *  当前显示的fragment
      */
     private BaseFragment currentFragment;
+    private BaseFragment messageManageFragment;
 
     /**
      *  显示对应页面的fragment
@@ -74,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         switch (pageId){
             case Const.PAGE_MESSAGE_MANAGE:
                 fragment = MessageManageFragment.getInstance();
+                messageManageFragment = fragment;
                 break;
              case Const.PAGE_EDUCATION_MANAGE:
                  fragment = EducationManageFragment.getInstance();
@@ -101,6 +105,13 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.REQUEST_PUB_NOTICE || requestCode == Const.REQUEST_PUB_NEWS){
+            if (messageManageFragment != null){
+                messageManageFragment.onActivityResult(requestCode,resultCode,data);
+            }
+        }
+    }
 }

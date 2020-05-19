@@ -43,6 +43,22 @@ public class PublishPresenter {
         pubBiz.pushLishNews(publishView.getPubTitle(),publishView.getOtherTitle(),publishView.getLink(),taskListener);
     }
 
+    /**
+     *  发布新闻
+     */
+    public void puNotices(){
+        IPublishView publishView = (IPublishView) view;
+        if (TextUtils.isEmpty(publishView.getPubTitle())){
+            publishView.showToast("请输入标题");
+            return;
+        }
+        if (TextUtils.isEmpty(publishView.getNoticeContent())){
+            publishView.showToast("请输入公告内容");
+            return;
+        }
+        pubBiz.pushLishNotices(publishView.getPubTitle(),publishView.getNoticeContent(),taskListener);
+    }
+
     private TaskListener<HttpResult> taskListener = new TaskListener<HttpResult>() {
         @Override
         public void onTaskStart(TaskListener<HttpResult> listener) {
@@ -54,6 +70,7 @@ public class PublishPresenter {
             view.hideLoading();
             if (result != null && result.isSuccess()){
                 view.showToast("发布成功");
+                ((IPublishView)view).onPublishSuccess();
                 return;
             }else {
                 view.showToast("发布失败");
