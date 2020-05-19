@@ -43,7 +43,7 @@ makeJar.dependsOn(clearJar, build)
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.squareup.okhttp3:okhttp:3.3.1'
-    implementation 'com.google.code.gson:gson:2.3.1'
+    api 'com.google.code.gson:gson:2.3.1'
     //RxJava和RxAndroid 用来做线程切换的
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
