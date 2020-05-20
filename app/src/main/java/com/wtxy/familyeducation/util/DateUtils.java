@@ -18,4 +18,9 @@ public class DateUtils {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return simpleDateFormat.format(new Date());
     }
+
+    public static String getCurrentTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(new Date());
+    }
 }

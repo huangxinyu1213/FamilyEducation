@@ -25,6 +25,7 @@ public class AddOrUpdateHomeWorkInfoTask extends FamilyEduHttpRequest<AddOrUpdat
         params.put("hw_detail",this.homeWorkInfo.getHw_detail()+"");
         params.put("hw_date",this.homeWorkInfo.getHw_date());
         params.put("class_id",this.homeWorkInfo.getClass_id()+"");
+        params.put("class_name",this.homeWorkInfo.getClass_name());
         params.put("subject_id",this.homeWorkInfo.getSubject_id()+"");
     }
 

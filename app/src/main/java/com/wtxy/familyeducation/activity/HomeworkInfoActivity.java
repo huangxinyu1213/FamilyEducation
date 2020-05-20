@@ -15,6 +15,7 @@ import com.wtxy.familyeducation.bean.HomeWorkInfo;
 import com.wtxy.familyeducation.iview.IHomeWorkInfoView;
 import com.wtxy.familyeducation.presenter.AddOrUpdateHomeWorkInfoPresenter;
 import com.wtxy.familyeducation.user.HomeworkInfo;
+import com.wtxy.familyeducation.util.DateUtils;
 
 import java.util.Date;
 
@@ -28,6 +29,7 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
     private AddOrUpdateHomeWorkInfoPresenter presenter;
     private boolean isAdd;
     private int classId;
+    private String className;
 
     public static Intent newIntent(Context context, HomeWorkInfo homeworkInfo) {
         Intent intent = new Intent(context, HomeworkInfoActivity.class);
@@ -44,6 +46,7 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
         isAdd = mHomeworkInfo == null;
         if (mHomeworkInfo != null) {
             classId = mHomeworkInfo.getClass_id();
+            className = mHomeworkInfo.getClass_name();
         }
         showTitle("作业详情");
         showRightBtn("保存");
@@ -61,6 +64,7 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
         if (mHomeworkInfo != null) {
             edtTitle.setText(mHomeworkInfo.getHw_title());
             edtSubTitle.setText(mHomeworkInfo.getHw_detail());
+            tvClass.setText(className);
         }
     }
 
@@ -68,7 +72,7 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == 1000) {
-            String className = data.getStringExtra("class_name");
+            className = data.getStringExtra("class_name");
             classId = data.getIntExtra("class_id",0);
             tvClass.setText(className);
         }
@@ -82,8 +86,9 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
         }
         mHomeworkInfo.setHw_title(edtTitle.getText().toString().trim());
         mHomeworkInfo.setHw_detail(edtSubTitle.getText().toString().trim());
-        mHomeworkInfo.setHw_date(new Date().toString());
+        mHomeworkInfo.setHw_date(DateUtils.getCurrentTime());
         mHomeworkInfo.setClass_id(classId);
+        mHomeworkInfo.setClass_name(className);
 //        Intent intent = new Intent();
 //        intent.putExtra("HomeworkInfo", mHomeworkInfo);
 //        setResult(300, intent);

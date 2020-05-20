@@ -7,6 +7,7 @@ public class HomeWorkInfo extends BaseItemBean {
     private String hw_date;
     private int class_id;
     private int subject_id;
+    private String class_name;
 
     public int getHw_id() {
         return hw_id;
@@ -54,6 +55,14 @@ public class HomeWorkInfo extends BaseItemBean {
 
     public void setSubject_id(int subject_id) {
         this.subject_id = subject_id;
+    }
+
+    public String getClass_name() {
+        return class_name;
+    }
+
+    public void setClass_name(String class_name) {
+        this.class_name = class_name;
     }
 
     @Override
