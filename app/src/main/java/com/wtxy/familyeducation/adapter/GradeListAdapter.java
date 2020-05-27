@@ -32,12 +32,12 @@ public class GradeListAdapter<T extends BaseItemBean> extends CommonAdapter<Base
             ((TextView) helper.getView(R.id.tv_title)).setText(gradeInfo.exam_name);
             ((TextView) helper.getView(R.id.tv_college)).setText(gradeInfo.class_name + " " + gradeInfo.subject_name);
             helper.getView(R.id.tv_time).setVisibility(View.GONE);
-        } else if (item instanceof HomeWorkInfo) {
-            HomeWorkInfo homeworkInfo = (HomeWorkInfo) item;
-            ((TextView) helper.getView(R.id.tv_title)).setText(homeworkInfo.getHw_title());
-            ((TextView) helper.getView(R.id.tv_college)).setText(homeworkInfo.getHw_detail());
+        } else if (item instanceof HomeworkInfo) {
+            HomeworkInfo homeworkInfo = (HomeworkInfo) item;
+            ((TextView) helper.getView(R.id.tv_title)).setText(homeworkInfo.hw_title);
+            ((TextView) helper.getView(R.id.tv_college)).setText(homeworkInfo.hw_detail);
             helper.getView(R.id.tv_time).setVisibility(View.VISIBLE);
-            ((TextView) helper.getView(R.id.tv_time)).setText(homeworkInfo.getHw_date());
+            ((TextView) helper.getView(R.id.tv_time)).setText(homeworkInfo.hw_time);
         }
 
     }

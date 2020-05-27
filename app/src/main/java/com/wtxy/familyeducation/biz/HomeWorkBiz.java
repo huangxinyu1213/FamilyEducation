@@ -1,6 +1,6 @@
 package com.wtxy.familyeducation.biz;
 
-import com.wtxy.familyeducation.bean.HomeWorkInfo;
+import com.wtxy.familyeducation.user.HomeworkInfo;
 import com.wtxy.familyeducation.httpresult.AddOrUpdateHomeWorkInfoResult;
 import com.wtxy.familyeducation.httpresult.LoadHomeWorkListResult;
 import com.wtxy.familyeducation.ibiz.IHomeWorkBiz;
@@ -18,7 +18,7 @@ public class HomeWorkBiz implements IHomeWorkBiz {
 
 
     @Override
-    public void addOrUpdateHomeWork(TaskListener<AddOrUpdateHomeWorkInfoResult> taskListener, HomeWorkInfo homeWorkInfo) {
+    public void addOrUpdateHomeWork(TaskListener<AddOrUpdateHomeWorkInfoResult> taskListener, HomeworkInfo homeWorkInfo) {
         AddOrUpdateHomeWorkInfoTask task = new AddOrUpdateHomeWorkInfoTask(taskListener, AddOrUpdateHomeWorkInfoResult.class);
         task.setHomeWorkInfo(homeWorkInfo);
         task.execute();

@@ -15,6 +15,8 @@ public class HomeworkInfo extends BaseItemBean {
     public String hw_time;
     public String subject_name;
     public String class_name;
+    public int class_id;
+    public int subject_id;
 
     @Override
     public String getShowTitle() {

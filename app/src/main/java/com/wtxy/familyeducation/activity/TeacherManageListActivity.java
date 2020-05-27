@@ -63,8 +63,8 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
         Intent intent = null;
         if (itemBean instanceof ExamInfo) {
             intent = ExamInfoActivity.newIntent(this, (ExamInfo) itemBean);
-        } else if (itemBean instanceof HomeWorkInfo) {
-            intent = HomeworkInfoActivity.newIntent(this, (HomeWorkInfo) itemBean);
+        } else if (itemBean instanceof HomeworkInfo) {
+            intent = HomeworkInfoActivity.newIntent(this, (HomeworkInfo) itemBean);
         }
         startActivityForResult(intent, 1);
     }

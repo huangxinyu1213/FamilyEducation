@@ -1,6 +1,6 @@
 package com.wtxy.familyeducation.task;
 
-import com.wtxy.familyeducation.bean.HomeWorkInfo;
+import com.wtxy.familyeducation.user.HomeworkInfo;
 import com.wtxy.familyeducation.httpresult.AddOrUpdateHomeWorkInfoResult;
 import com.wtxy.familyeducation.net.FamilyEduHttpRequest;
 import com.zhy.http.okhttp.requestBase.TaskListener;
@@ -8,7 +8,7 @@ import com.zhy.http.okhttp.requestBase.TaskListener;
 import java.util.HashMap;
 
 public class AddOrUpdateHomeWorkInfoTask extends FamilyEduHttpRequest<AddOrUpdateHomeWorkInfoResult> {
-    private HomeWorkInfo homeWorkInfo;
+    private HomeworkInfo homeWorkInfo;
     public AddOrUpdateHomeWorkInfoTask(TaskListener<AddOrUpdateHomeWorkInfoResult> taskListener, Class<AddOrUpdateHomeWorkInfoResult> mResultClassType) {
         super(taskListener, mResultClassType);
     }
@@ -20,13 +20,13 @@ public class AddOrUpdateHomeWorkInfoTask extends FamilyEduHttpRequest<AddOrUpdat
 
     @Override
     protected void addParam(HashMap<String, String> params) {
-        params.put("hw_id",this.homeWorkInfo.getHw_id()+"");
-        params.put("hw_title",this.homeWorkInfo.getHw_title()+"");
-        params.put("hw_detail",this.homeWorkInfo.getHw_detail()+"");
-        params.put("hw_date",this.homeWorkInfo.getHw_date());
-        params.put("class_id",this.homeWorkInfo.getClass_id()+"");
-        params.put("class_name",this.homeWorkInfo.getClass_name());
-        params.put("subject_id",this.homeWorkInfo.getSubject_id()+"");
+        params.put("hw_id",this.homeWorkInfo.hw_id+"");
+        params.put("hw_title",this.homeWorkInfo.hw_title+"");
+        params.put("hw_detail",this.homeWorkInfo.hw_detail+"");
+        params.put("hw_date",this.homeWorkInfo.hw_time);
+        params.put("class_id",this.homeWorkInfo.class_id+"");
+        params.put("class_name",this.homeWorkInfo.class_name);
+        params.put("subject_id",this.homeWorkInfo.subject_id+"");
     }
 
     @Override
@@ -39,11 +39,11 @@ public class AddOrUpdateHomeWorkInfoTask extends FamilyEduHttpRequest<AddOrUpdat
         return "POST";
     }
 
-    public HomeWorkInfo getHomeWorkInfo() {
+    public HomeworkInfo getHomeWorkInfo() {
         return homeWorkInfo;
     }
 
-    public void setHomeWorkInfo(HomeWorkInfo homeWorkInfo) {
+    public void setHomeWorkInfo(HomeworkInfo homeWorkInfo) {
         this.homeWorkInfo = homeWorkInfo;
     }
 }

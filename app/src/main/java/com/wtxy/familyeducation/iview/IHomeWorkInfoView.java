@@ -1,8 +1,8 @@
 package com.wtxy.familyeducation.iview;
 
-import com.wtxy.familyeducation.bean.HomeWorkInfo;
+import com.wtxy.familyeducation.user.HomeworkInfo;
 
 public interface IHomeWorkInfoView extends IView {
     public void modifySuccess();
-    public HomeWorkInfo getHomeWorkInfo();
+    public HomeworkInfo getHomeWorkInfo();
 }

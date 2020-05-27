@@ -25,13 +25,13 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
     private TextView tvClass;
     private RelativeLayout rl_check_class;
 
-    private HomeWorkInfo mHomeworkInfo;
+    private HomeworkInfo mHomeworkInfo;
     private AddOrUpdateHomeWorkInfoPresenter presenter;
     private boolean isAdd;
     private int classId;
     private String className;
 
-    public static Intent newIntent(Context context, HomeWorkInfo homeworkInfo) {
+    public static Intent newIntent(Context context, HomeworkInfo homeworkInfo) {
         Intent intent = new Intent(context, HomeworkInfoActivity.class);
         intent.putExtra("HomeworkInfo", homeworkInfo);
         return intent;
@@ -42,11 +42,11 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
         setContentView(R.layout.activity_homework_info);
         super.onCreate(savedInstanceState);
         presenter = new AddOrUpdateHomeWorkInfoPresenter(this);
-        mHomeworkInfo = (HomeWorkInfo) getIntent().getSerializableExtra("HomeworkInfo");
+        mHomeworkInfo = (HomeworkInfo) getIntent().getSerializableExtra("HomeworkInfo");
         isAdd = mHomeworkInfo == null;
         if (mHomeworkInfo != null) {
-            classId = mHomeworkInfo.getClass_id();
-            className = mHomeworkInfo.getClass_name();
+            classId = mHomeworkInfo.class_id;
+            className = mHomeworkInfo.class_name;
         }
         showTitle("作业详情");
         showRightBtn("保存");
@@ -62,8 +62,8 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
             }
         });
         if (mHomeworkInfo != null) {
-            edtTitle.setText(mHomeworkInfo.getHw_title());
-            edtSubTitle.setText(mHomeworkInfo.getHw_detail());
+            edtTitle.setText(mHomeworkInfo.hw_title);
+            edtSubTitle.setText(mHomeworkInfo.hw_detail);
             tvClass.setText(className);
         }
     }
@@ -82,13 +82,13 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
     public void onRightBtnClick() {
         super.onRightBtnClick();
         if (mHomeworkInfo == null) {
-            mHomeworkInfo = new HomeWorkInfo();
+            mHomeworkInfo = new HomeworkInfo();
         }
-        mHomeworkInfo.setHw_title(edtTitle.getText().toString().trim());
-        mHomeworkInfo.setHw_detail(edtSubTitle.getText().toString().trim());
-        mHomeworkInfo.setHw_date(DateUtils.getCurrentTime());
-        mHomeworkInfo.setClass_id(classId);
-        mHomeworkInfo.setClass_name(className);
+        mHomeworkInfo.hw_title = edtTitle.getText().toString().trim();
+        mHomeworkInfo.hw_detail = edtSubTitle.getText().toString().trim();
+        mHomeworkInfo.hw_time = (DateUtils.getCurrentTime());
+        mHomeworkInfo.class_id = classId;
+        mHomeworkInfo.class_name = className;
 //        Intent intent = new Intent();
 //        intent.putExtra("HomeworkInfo", mHomeworkInfo);
 //        setResult(300, intent);
@@ -103,7 +103,7 @@ public class HomeworkInfoActivity extends BaseActivity implements IHomeWorkInfoV
     }
 
     @Override
-    public HomeWorkInfo getHomeWorkInfo() {
+    public HomeworkInfo getHomeWorkInfo() {
         return this.mHomeworkInfo;
     }
 
