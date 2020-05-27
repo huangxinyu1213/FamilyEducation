@@ -21,7 +21,7 @@ import java.util.List;
 public class ChoiceClassActivity extends BaseActivity {
 
     private List<ClassInfo> classList;
-    private CommonListAdapter mAdapter;
+    private CommonListAdapter mAdapter;//listView的监听适配器
     private ListView listView;
 
     private IManageListBiz manageListBiz;
@@ -30,12 +30,13 @@ public class ChoiceClassActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_choice_class);
         super.onCreate(savedInstanceState);
+
         manageListBiz = new ManageListBiz();
         listView = findViewById(R.id.manage_content);
         classList = new ArrayList<>();
 //        getTestClass();
         mAdapter = new CommonListAdapter(this, classList, R.layout.education_manage_item);
-        listView.setAdapter(mAdapter);
+        listView.setAdapter(mAdapter);//
         showTitle("班级选择");
         manageListBiz.loadClassList(new TaskListener<LoadClassListResult>() {
             @Override
@@ -63,6 +64,7 @@ public class ChoiceClassActivity extends BaseActivity {
         });
     }
 
+    // 测试数据
     private void getTestClass() {
         ClassInfo classInfo1 = new ClassInfo();
         classInfo1.setClass_id(111);

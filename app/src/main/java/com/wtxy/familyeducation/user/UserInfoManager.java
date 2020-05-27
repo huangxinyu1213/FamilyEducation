@@ -17,7 +17,7 @@ import com.wtxy.familyeducation.util.SPUtils;
  */
 public class UserInfoManager {
     private static UserInfo userInfo;
-    private static UserInfoManager mInstance;
+    private static UserInfoManager mInstance;// 单例
 
     private UserInfoManager() {
         if (userInfo == null) {
@@ -25,7 +25,7 @@ public class UserInfoManager {
         }
     }
 
-    public static UserInfoManager getInstance() {
+    public static UserInfoManager getInstance() {//单例方法
         if (mInstance == null) {
             mInstance = new UserInfoManager();
         }

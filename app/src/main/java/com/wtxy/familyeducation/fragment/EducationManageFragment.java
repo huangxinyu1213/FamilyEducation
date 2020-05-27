@@ -16,6 +16,7 @@ import com.wtxy.familyeducation.activity.StudentHomeworkListActivity;
 import com.wtxy.familyeducation.activity.StudentScoreListActivity;
 import com.wtxy.familyeducation.activity.SubjectListActivity;
 import com.wtxy.familyeducation.activity.TeacherManageListActivity;
+import com.wtxy.familyeducation.activity.ClassTableActivity;
 import com.wtxy.familyeducation.adapter.CommonListAdapter;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
 import com.wtxy.familyeducation.bean.EducationManagerFactory;
@@ -94,7 +95,9 @@ public class EducationManageFragment extends BaseFragment {
                     intent = new Intent(getActivity(), StudentHomeworkListActivity.class);
                     intent.putExtra(Const.KEY_MANAGE_INFO, educationManageInfo);
                 } else if (educationManageInfo.getManageType() == EducationManageInfo.MANAGE_TYPE_STUDENT_QUERY_COURSE) {
-
+                    intent = new Intent(getActivity(),ClassTableActivity.class);
+                    intent.putExtra(Const.KEY_CLASS_ID,UserInfoManager.getInstance().getCurrentUserInfo().getStudentInfo().class_id);
+                    intent.putExtra(Const.KEY_CLASS_NAME, "班级课表");
                 }
                 break;
             default:

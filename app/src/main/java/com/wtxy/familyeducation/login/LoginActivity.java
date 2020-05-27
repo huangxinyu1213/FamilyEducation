@@ -24,7 +24,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login);//内容布局
         super.onCreate(savedInstanceState);
         mLoginType = getIntent().getIntExtra("loginType", Tutor.TYPE_MANAGER);//默认跳转教师
         refreshTitleView();
@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void gotoHomeActivity() {
         Intent intent1 = new Intent(this, HomeActivity.class);
         startActivity(intent1);
-        finish();
+        finish();//当前页面结束掉
     }
 
     @Override

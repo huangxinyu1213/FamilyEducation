@@ -45,11 +45,21 @@
     </style>
 
     <!--自定义Dialog的底部弹出的动画,直接从中间弹出的不加动画-->
-    <style name="DialogBottomAnimation"  parent="android:Animation">
+    <style name="DialogBottomAnimation" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_bottom_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_bottom_exit</item>
     </style>
+
     <style name="LodingDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

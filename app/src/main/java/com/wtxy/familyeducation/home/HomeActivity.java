@@ -89,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
                  fragment = MessageManageFragment.getInstance();
                  break;
         }
+        // 页面转场动画
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (!fragment.isAdded()){
             if (currentFragment != null) {

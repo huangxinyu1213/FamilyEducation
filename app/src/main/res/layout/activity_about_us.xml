@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AboutUsActivity">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+        <include layout="@layout/layout_comon_title" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@color/commen_blue"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+        <TextView
+            android:id="@+id/versionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="v1.0"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/descView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="        本系统能够极大的方便学校、教师、家长和学生对教学工作的关注和了解，以及各方对于学生学习情况和教学信息的及时同步，提高各方的工作和学习效率，同时具有较强的可扩展性，能够在当前基础上迭代新的功能，具有非常积极的现实意义和应用价值。"
+
+            android:textSize="14dp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

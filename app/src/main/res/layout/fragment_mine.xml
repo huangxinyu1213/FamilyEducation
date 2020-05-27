@@ -75,12 +75,14 @@
         android:paddingRight="@dimen/commend_padding"
         android:paddingLeft="@dimen/commend_padding"
         android:paddingBottom="10dp">
+
         <TextView
+            android:id="@+id/aboutus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:text="关于家校互动平台"
             android:textColor="@color/common_black"
-            android:text="关于家校互动平台"/>
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

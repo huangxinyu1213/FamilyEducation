@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.wtxy.familyeducation.MainActivity;
 import com.wtxy.familyeducation.R;
+import com.wtxy.familyeducation.activity.AboutUsActivity;
 import com.wtxy.familyeducation.user.UserInfo;
 import com.wtxy.familyeducation.user.UserInfoManager;
 
@@ -62,6 +63,15 @@ public class MineFragment extends BaseFragment{
                 UserInfoManager.getInstance().loginOut(getActivity());
                 getActivity().startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        TextView aboutUsView = view.findViewById(R.id.aboutus);
+        aboutUsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+                startActivity(intent);
             }
         });
     }

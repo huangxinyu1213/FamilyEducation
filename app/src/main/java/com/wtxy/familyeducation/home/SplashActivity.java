@@ -16,7 +16,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         UserInfoManager.getInstance().autoLogin(this);
+
         if (LoginStateUtil.isLoginSuccess(this)){
             handler.postDelayed(new Runnable() {
                 @Override

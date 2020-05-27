@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.wtxy.familyeducation.R;
+import com.wtxy.familyeducation.activity.NoticeDetailActivity;
 import com.wtxy.familyeducation.adapter.MessageManagePageAdapter;
 import com.wtxy.familyeducation.adapter.NewsAdapter;
 import com.wtxy.familyeducation.adapter.NoticeAdapter;
@@ -112,7 +113,17 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
         noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                goToWebActivity(noticeData.get(i).notice_detail,"公告");
+                Notices n = noticeData.get(i);
+                if (n.notice_detail.startsWith("http") == false) {
+                    Intent intent = new Intent(getActivity(), NoticeDetailActivity.class);
+                    intent.putExtra("title", n.notice_title);
+                    intent.putExtra("detail", n.notice_detail);
+                    intent.putExtra("author", n.notice_author);
+                    intent.putExtra("date", n.notice_time);
+                    startActivity(intent);
+                } else {
+                    goToWebActivity(noticeData.get(i).notice_detail,"公告");
+                }
             }
         });
     }
@@ -124,7 +135,8 @@ public class MessageManageFragment extends BaseFragment implements IMessageManag
         btnNews.setOnClickListener(this);
         btnNotices.setOnClickListener(this);
         ImageView btnAdd = view.findViewById(R.id.add);
-        if (UserInfoManager.getInstance().getCurrentUserInfo().getCurrentUserType() == UserInfo.ACCOUNT_TYPE_MANAGER) {
+        int currentUserType = UserInfoManager.getInstance().getCurrentUserInfo().getCurrentUserType();
+        if (currentUserType == UserInfo.ACCOUNT_TYPE_MANAGER || currentUserType == UserInfo.ACCOUNT_TYPE_TEACHER) {
              btnAdd.setVisibility(View.VISIBLE);
              btnAdd.setOnClickListener(this);
         }else {

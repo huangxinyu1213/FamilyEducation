@@ -47,7 +47,7 @@ public class LoginPresenter {
                 loginView.showToast("密码不能为空");
                 return;
             }
-            loginBiz.login(loginView.getLoginType(), loginView.getCount(), loginView.getPwd(), taskListener);
+            loginBiz.login(loginView.getLoginType(), loginView.getCount(), loginView.getPwd(), taskListener);//登录并设置回调监听
         }
     }
 
@@ -71,9 +71,9 @@ public class LoginPresenter {
                     view.showToast("登录成功");
                 }
                 Gson gson = new Gson();
-                String resultStr = gson.toJson(result.getResult());
-                SPUtils.put(view.getContext(), Const.KEY_LOGIN_RESULT_INFO, resultStr);
-                saveUserInfo(Integer.parseInt(result.getResult().account_type), result.getResult());
+                String resultStr = gson.toJson(result.getResult());// 把整个result转成json字符串
+                SPUtils.put(view.getContext(), Const.KEY_LOGIN_RESULT_INFO, resultStr);//存起来
+                saveUserInfo(Integer.parseInt(result.getResult().account_type), result.getResult());//给单例赋值
             } else {
                 //登录失败
                 if (view != null) {

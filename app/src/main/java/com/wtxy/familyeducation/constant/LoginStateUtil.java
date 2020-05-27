@@ -29,6 +29,7 @@ public class LoginStateUtil {
      * @return
      */
     public static boolean isLoginSuccess(Context context){
+        // context不管， 第二个参数是登录状态的key，第三个参数是为null的时候默认值
         int loginState = (int) SPUtils.get(context,Const.KEY_LOGIN_STATE,LOGIN_OFFLINE);
         return loginState == LOGIN_SUCCESS;
     }
