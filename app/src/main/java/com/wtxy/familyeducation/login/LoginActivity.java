@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.wtxy.familyeducation.BaseActivity;
 import com.wtxy.familyeducation.home.HomeActivity;
@@ -32,6 +33,8 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         edtPwd = findViewById(R.id.edtPwd);
         btnLogin = findViewById(R.id.btn_login);
         mPresenter = new LoginPresenter(this);
+        TextView btnRegister = findViewById(R.id.regist);
+        btnRegister.setVisibility(View.INVISIBLE);
     }
 
     public void onClick(View view) {
