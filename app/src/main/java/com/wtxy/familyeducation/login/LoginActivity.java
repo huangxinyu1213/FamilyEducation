@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
             case R.id.regist:
                 Intent intent = new Intent(this, RegistActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
                 break;
             default:
                 break;

@@ -13,6 +13,8 @@ import com.wtxy.familyeducation.R;
 import com.wtxy.familyeducation.adapter.GradeListAdapter;
 import com.wtxy.familyeducation.bean.BaseItemBean;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
+import com.wtxy.familyeducation.bean.HomeWorkInfo;
+import com.wtxy.familyeducation.bean.SubjectInfo;
 import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.iview.ITeacherListView;
 import com.wtxy.familyeducation.presenter.TeacherListPresenter;
@@ -61,8 +63,8 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
         Intent intent = null;
         if (itemBean instanceof ExamInfo) {
             intent = ExamInfoActivity.newIntent(this, (ExamInfo) itemBean);
-        } else if (itemBean instanceof HomeworkInfo) {
-            intent = HomeworkInfoActivity.newIntent(this, (HomeworkInfo) itemBean);
+        } else if (itemBean instanceof HomeWorkInfo) {
+            intent = HomeworkInfoActivity.newIntent(this, (HomeWorkInfo) itemBean);
         }
         startActivityForResult(intent, 1);
     }
@@ -76,7 +78,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
     }
 
     @Override
-    public void refreshHomeworkList(List<HomeworkInfo> homeworkInfos) {
+    public void refreshHomeworkList(List<HomeWorkInfo> homeworkInfos) {
         showRightBtn("新增");
         mData.clear();
         mData.addAll(homeworkInfos);
@@ -98,13 +100,14 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
             }
         } else if (manageType == EducationManageInfo.MANAGE_TYPE_MANAGER_HOMEWORK) {
             if (resultCode == 300) {
-                HomeworkInfo homeworkInfo = (HomeworkInfo) data.getSerializableExtra("HomeworkInfo");
-                if (homeworkInfo != null) {
-                    if (!checkHomeworkInfoData(homeworkInfo)) {
-                        mData.add(homeworkInfo);
-                    }
-                    mAdapter.notifyDataSetChanged();
-                }
+                this.teacherListPresenter.loadData(manageType);
+//                HomeWorkInfo homeworkInfo = (HomeWorkInfo) data.getSerializableExtra("HomeworkInfo");
+//                if (homeworkInfo != null) {
+//                    if (!checkHomeworkInfoData(homeworkInfo)) {
+//                        mData.add(homeworkInfo);
+//                    }
+//                    mAdapter.notifyDataSetChanged();
+//                }
             }
         }
     }
@@ -121,11 +124,11 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
         return false;
     }
 
-    private boolean checkHomeworkInfoData(HomeworkInfo homeworkInfo) {
+    private boolean checkHomeworkInfoData(HomeWorkInfo homeworkInfo) {
         for (BaseItemBean bean : mData) {
-            if (((HomeworkInfo) bean).homeword_id == homeworkInfo.homeword_id) {
-                ((HomeworkInfo) bean).homeword_name = homeworkInfo.homeword_name;
-                ((HomeworkInfo) bean).homeword_desc = homeworkInfo.homeword_desc;
+            if (((HomeWorkInfo) bean).getHw_id() == homeworkInfo.getHw_id()) {
+                ((HomeWorkInfo) bean).setHw_title(homeworkInfo.getHw_title());
+                ((HomeWorkInfo) bean).setHw_detail(homeworkInfo.getHw_detail());
                 return true;
             }
         }

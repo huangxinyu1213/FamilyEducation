@@ -3,7 +3,11 @@ package com.wtxy.familyeducation.presenter;
 import com.wtxy.familyeducation.bean.EducationManageInfo;
 import com.wtxy.familyeducation.httpresult.LoadExamListResult;
 import com.wtxy.familyeducation.httpresult.LoadTeacherListResult;
+import com.wtxy.familyeducation.biz.HomeWorkBiz;
+import com.wtxy.familyeducation.httpresult.LoadHomeWorkListResult;
+import com.wtxy.familyeducation.ibiz.IHomeWorkBiz;
 import com.wtxy.familyeducation.iview.ITeacherListView;
+import com.wtxy.familyeducation.task.LoadHomeWorkListTask;
 import com.wtxy.familyeducation.task.LoadExamListTask;
 import com.wtxy.familyeducation.user.GradeInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
@@ -15,9 +19,11 @@ import java.util.List;
 public class TeacherListPresenter {
 
     private ITeacherListView teacherListView;
+    private IHomeWorkBiz homeWorkBiz;
 
     public TeacherListPresenter(ITeacherListView teacherListView) {
         this.teacherListView = teacherListView;
+        this.homeWorkBiz = new HomeWorkBiz();
     }
 
     public void loadData(int manageType) {
@@ -27,7 +33,7 @@ public class TeacherListPresenter {
                 loadExamListTask.execute();
                 break;
             case EducationManageInfo.MANAGE_TYPE_MANAGER_HOMEWORK:
-                getTestHomeworkDate();
+                this.homeWorkBiz.loadHomeWorkList(taskListener,0);
                 break;
         }
     }
@@ -65,23 +71,22 @@ public class TeacherListPresenter {
 //        }
     }
 
-    private void getTestHomeworkDate() {
-        List<HomeworkInfo> list = new ArrayList<>();
-        HomeworkInfo homeworkInfo1 = new HomeworkInfo();
-        homeworkInfo1.homeword_id = 1001;
-        homeworkInfo1.homeword_name = "2019年第一周作业";
-        homeworkInfo1.homeword_desc = "做一个小型商店管理系统，能够实现对商店货物的增删改查操作";
-        homeworkInfo1.homeword_time = "2019-09-21";
-        list.add(homeworkInfo1);
-        HomeworkInfo homeworkInfo2 = new HomeworkInfo();
-        homeworkInfo2.homeword_id = 1002;
-        homeworkInfo2.homeword_name = "2019年第二周作业";
-        homeworkInfo2.homeword_desc = "做一个小型游戏界面，能够实现游戏任务的走路前进和后退";
-        homeworkInfo2.homeword_time = "2019-09-28";
-        list.add(homeworkInfo2);
-        if (teacherListView != null) {
-            teacherListView.refreshHomeworkList(list);
+    private TaskListener<LoadHomeWorkListResult> taskListener = new TaskListener<LoadHomeWorkListResult>() {
+        @Override
+        public void onTaskStart(TaskListener<LoadHomeWorkListResult> listener) {
+
         }
+
+        @Override
+        public void onTaskComplete(TaskListener<LoadHomeWorkListResult> listener, LoadHomeWorkListResult result, Exception e) {
+            if (result != null && result.isSuccess()) {
+                teacherListView.refreshHomeworkList(result.getResult());
+            }
+        }
+    };
+
+    private void getTestHomeworkDate() {
+
     }
 
 }
