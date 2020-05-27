@@ -18,6 +18,7 @@ import com.wtxy.familyeducation.iview.IManagerListView;
 import com.wtxy.familyeducation.presenter.ManageListPresenter;
 import com.wtxy.familyeducation.user.TeachInfo;
 import com.zhy.http.okhttp.requestBase.TaskListener;
+import com.wtxy.familyeducation.biz.ManageListBiz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,26 +29,20 @@ public class ChoiceClassActivity extends BaseActivity implements IManagerListVie
     private CommonListAdapter mAdapter;//listView的监听适配器
     private ListView listView;
     private ManageListPresenter manageListPresenter;
+    private ManageListBiz manageListBiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_choice_class);
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
 
         manageListBiz = new ManageListBiz();
-=======
->>>>>>> e3eabf5496b88c3bf679cd13818996163aee1afe
         listView = findViewById(R.id.manage_content);
         classList = new ArrayList<>();
         manageListPresenter = new ManageListPresenter(this);
         mAdapter = new CommonListAdapter(this, classList, R.layout.education_manage_item);
-<<<<<<< HEAD
         listView.setAdapter(mAdapter);//
-=======
-        listView.setAdapter(mAdapter);
         getTestClass();
->>>>>>> e3eabf5496b88c3bf679cd13818996163aee1afe
         showTitle("班级选择");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,11 +57,7 @@ public class ChoiceClassActivity extends BaseActivity implements IManagerListVie
         });
     }
 
-<<<<<<< HEAD
-    // 测试数据
-=======
 
->>>>>>> e3eabf5496b88c3bf679cd13818996163aee1afe
     private void getTestClass() {
         this.manageListPresenter.loadData(EducationManageInfo.MANAGE_TYPE_MANAGER_CLASS);
 //        ClassInfo classInfo1 = new ClassInfo();
