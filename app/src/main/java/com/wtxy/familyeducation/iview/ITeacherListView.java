@@ -16,5 +16,5 @@ import java.util.List;
 public interface ITeacherListView extends IView {
     public void refreshGrandList(List<ExamInfo> gradeInfos);
 
-    public void refreshHomeworkList(List<HomeWorkInfo> homeworkInfos);
+    public void refreshHomeworkList(List<HomeworkInfo> homeworkInfos);
 }

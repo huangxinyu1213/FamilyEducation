@@ -78,7 +78,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
     }
 
     @Override
-    public void refreshHomeworkList(List<HomeWorkInfo> homeworkInfos) {
+    public void refreshHomeworkList(List<HomeworkInfo> homeworkInfos) {
         showRightBtn("新增");
         mData.clear();
         mData.addAll(homeworkInfos);

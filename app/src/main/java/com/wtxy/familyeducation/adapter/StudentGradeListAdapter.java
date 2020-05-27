@@ -33,9 +33,9 @@ public class StudentGradeListAdapter<T extends BaseItemBean> extends CommonAdapt
             ((TextView) helper.getView(R.id.tv_right)).setText(gradeInfo.score_num + "");
         } else if (item instanceof HomeworkInfo) {
             HomeworkInfo homeworkInfo = (HomeworkInfo) item;
-            ((TextView) helper.getView(R.id.tv_title)).setText(homeworkInfo.homeword_name);
-            ((TextView) helper.getView(R.id.tv_subtitle)).setText(homeworkInfo.homeword_desc);
-            ((TextView) helper.getView(R.id.tv_right)).setText(homeworkInfo.homeword_time);
+            ((TextView) helper.getView(R.id.tv_title)).setText(homeworkInfo.hw_title);
+            ((TextView) helper.getView(R.id.tv_subtitle)).setText(homeworkInfo.hw_detail);
+            ((TextView) helper.getView(R.id.tv_right)).setText(homeworkInfo.hw_time);
         }
 
     }

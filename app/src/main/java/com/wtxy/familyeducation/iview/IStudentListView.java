@@ -1,5 +1,6 @@
 package com.wtxy.familyeducation.iview;
 
+import com.wtxy.familyeducation.bean.HomeWorkInfo;
 import com.wtxy.familyeducation.bean.ScoreInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
 

@@ -19,6 +19,8 @@ import com.wtxy.familyeducation.iview.IStudentListView;
 import com.wtxy.familyeducation.presenter.StudentListPresenter;
 import com.wtxy.familyeducation.user.GradeInfo;
 import com.wtxy.familyeducation.user.HomeworkInfo;
+import com.wtxy.familyeducation.bean.HomeWorkInfo;
+import com.wtxy.familyeducation.user.UserInfoManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,8 @@ public class StudentHomeworkListActivity extends BaseActivity implements IStuden
         EducationManageInfo educationManageInfo = (EducationManageInfo) getIntent().getSerializableExtra(Const.KEY_MANAGE_INFO);
         studentListPresenter = new StudentListPresenter(this);
         if (educationManageInfo != null) {
-            studentListPresenter.loadStudentHomewordData();
+            Integer classId = Integer.parseInt(UserInfoManager.getInstance().getCurrentUserInfo().getStudentInfo().class_id);
+            studentListPresenter.loadStudentHomewordData(classId);
             showTitle(educationManageInfo.getTitle());
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

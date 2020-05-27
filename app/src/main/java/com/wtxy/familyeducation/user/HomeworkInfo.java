@@ -9,15 +9,15 @@ import com.wtxy.familyeducation.bean.BaseItemBean;
  * @Describe:
  */
 public class HomeworkInfo extends BaseItemBean {
-    public int homeword_id;
-    public String homeword_name;
-    public String homeword_desc;
-    public String homeword_time;
-    public String homeword_course;
-
+    public int hw_id;
+    public String hw_title;
+    public String hw_detail;
+    public String hw_time;
+    public String subject_name;
+    public String class_name;
 
     @Override
     public String getShowTitle() {
-        return homeword_name;
+        return hw_title;
     }
 }

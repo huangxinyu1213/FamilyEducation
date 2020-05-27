@@ -30,9 +30,9 @@ public class StudentHomeworkDetailActivity extends BaseActivity {
         tv_course = findViewById(R.id.tv_course);
         tv_desc = findViewById(R.id.tv_desc);
         if (mHomeworkInfo != null) {
-            tv_name.setText(mHomeworkInfo.homeword_name);
-            tv_course.setText(mHomeworkInfo.homeword_course);
-            tv_desc.setText(mHomeworkInfo.homeword_desc);
+            tv_name.setText(mHomeworkInfo.hw_title);
+            tv_course.setText(mHomeworkInfo.class_name);
+            tv_desc.setText(mHomeworkInfo.hw_detail);
         }
     }
 
