@@ -34,7 +34,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
     private GradeListAdapter mAdapter;
     private List<BaseItemBean> mData = new ArrayList<>();
     private TeacherListPresenter teacherListPresenter;
-    private int manageType;
+    private int manageType;//判断是作业管理还是成绩管理
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class TeacherManageListActivity extends BaseActivity implements ITeacherL
         } else if (itemBean instanceof HomeworkInfo) {
             intent = HomeworkInfoActivity.newIntent(this, (HomeworkInfo) itemBean);
         }
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, 1);//跳转
     }
 
     @Override
