@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.wtxy.familyeducation.BaseActivity;
 import com.wtxy.familyeducation.R;
@@ -45,6 +46,17 @@ public class ManagerListManageActivity extends BaseActivity implements IManagerL
             manageType = educationManageInfo.getManageType();
             manageListPresenter.loadData(educationManageInfo.getManageType());
             showTitle(educationManageInfo.getTitle());
+            if (manageType == EducationManageInfo.MANAGE_TYPE_MANAGER_CLASS) {
+                TextView rightV = findViewById(R.id.btn_right);
+                rightV.setText("新增班级");
+                rightV.setVisibility(View.VISIBLE);
+                rightV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        showAddDialog();
+                    }
+                });
+            }
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
