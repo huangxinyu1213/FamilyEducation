@@ -66,8 +66,7 @@ public class MineFragment extends BaseFragment{
             }
         });
 
-        TextView aboutUsView = view.findViewById(R.id.aboutus);
-        aboutUsView.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.rl_aboutus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AboutUsActivity.class);

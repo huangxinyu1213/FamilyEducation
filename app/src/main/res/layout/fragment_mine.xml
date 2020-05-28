@@ -69,6 +69,7 @@
         android:layout_height="1dp"
         android:background="@color/common_divider"/>
     <RelativeLayout
+        android:id="@+id/rl_aboutus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
