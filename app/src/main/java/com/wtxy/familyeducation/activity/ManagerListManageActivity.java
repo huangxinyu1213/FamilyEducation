@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +25,8 @@ import com.wtxy.familyeducation.constant.Const;
 import com.wtxy.familyeducation.iview.IManagerListView;
 import com.wtxy.familyeducation.presenter.ManageListPresenter;
 import com.wtxy.familyeducation.user.TeachInfo;
+import com.wtxy.familyeducation.util.ScreenUtils;
+import com.wtxy.familyeducation.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,17 +53,6 @@ public class ManagerListManageActivity extends BaseActivity implements IManagerL
             manageType = educationManageInfo.getManageType();
             manageListPresenter.loadData(educationManageInfo.getManageType());
             showTitle(educationManageInfo.getTitle());
-            if (manageType == EducationManageInfo.MANAGE_TYPE_MANAGER_CLASS) {
-                TextView rightV = findViewById(R.id.btn_right);
-                rightV.setText("新增班级");
-                rightV.setVisibility(View.VISIBLE);
-                rightV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        showAddDialog();
-                    }
-                });
-            }
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,6 +87,7 @@ public class ManagerListManageActivity extends BaseActivity implements IManagerL
 
     @Override
     public void refreshClassList(List<ClassInfo> classInfos) {
+        showRightBtn("新增班级");
         mData.clear();
         mData.addAll(classInfos);
         mAdapter.notifyDataSetChanged();
@@ -120,7 +117,7 @@ public class ManagerListManageActivity extends BaseActivity implements IManagerL
 
     @Override
     public void showToast(String msg) {
-
+        ToastUtil.showShortToast(this,msg);
     }
 
     @Override
@@ -129,8 +126,48 @@ public class ManagerListManageActivity extends BaseActivity implements IManagerL
         if (manageType == EducationManageInfo.MANAGE_TYPE_MANAGER_TEAHCER){
            Intent intent = new Intent(this,TeacherInfoActivity.class);
            startActivityForResult(intent,1);
+           return;
         }
+        if (manageType == EducationManageInfo.MANAGE_TYPE_MANAGER_CLASS){
+            showAddDialog();
+            return;
+        }
+
     }
+
+    private void showAddDialog(){
+        View view = LayoutInflater.from(this).inflate(R.layout.layout_class_add,null,false);
+        final AlertDialog dialog = new AlertDialog.Builder(this).setView(view).create();
+        final EditText editText = view.findViewById(R.id.edt_subject);
+        TextView btn_cancel_high_opion = view.findViewById(R.id.btn_cancel);
+        TextView btn_agree_high_opion = view.findViewById(R.id.btn_confirm);
+
+        btn_cancel_high_opion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        btn_agree_high_opion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(editText.getText())){
+                    showToast("请输入班级名称");
+                    return;
+                }
+                manageListPresenter.addClass(editText.getText().toString().trim());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        //此处设置位置窗体大小，我这里设置为了手机屏幕宽度的3/4  注意一定要在show方法调用后再写设置窗口大小的代码，否则不起效果会
+        dialog.getWindow().setLayout((ScreenUtils.getScreenWidth(this)/4*3), LinearLayout.LayoutParams.WRAP_CONTENT);
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
