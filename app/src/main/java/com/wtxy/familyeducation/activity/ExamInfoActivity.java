@@ -50,7 +50,7 @@ public class ExamInfoActivity extends BaseActivity {
 
     public static Intent newIntent(Context context, ExamInfo gradeInfo) {
         Intent intent = new Intent(context, ExamInfoActivity.class);
-        intent.putExtra("GradeInfo", gradeInfo);
+        intent.putExtra("GradeInfo", gradeInfo);//先存
         return intent;
     }
 
@@ -58,11 +58,11 @@ public class ExamInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_grand_info);
         super.onCreate(savedInstanceState);
-        mGradeInfo = (ExamInfo) getIntent().getSerializableExtra("GradeInfo");
+        mGradeInfo = (ExamInfo) getIntent().getSerializableExtra("GradeInfo");//获取刚刚跳转的，取出来
         showTitle("考试详情");
         showRightBtn("保存");
-        scoreList = new ArrayList<>();
-        studentInfoList = new ArrayList<>();
+        scoreList = new ArrayList<>();//申明空的分数数组
+        studentInfoList = new ArrayList<>();//申明空的学生数组
 //        getTestScore();
         edtTitle = findViewById(R.id.edtTitle);
         rl_check_subject = findViewById(R.id.rl_check_subject);

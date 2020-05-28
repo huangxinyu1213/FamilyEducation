@@ -28,41 +28,41 @@ public class ClassTableActivity extends BaseActivity {
     private int courseId;
     private String className;
     private CourseAdapter courseAdapter;
-    private List<CourseInfo> selectCourseInfo;
-    private List<List<CourseInfo>> mCourseList;
+    private List<CourseInfo> selectCourseInfo;//选中当天的所有课程表
+    private List<List<CourseInfo>> mCourseList;//所有的课程表
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_class_table);
         super.onCreate(savedInstanceState);
-        courseId = getIntent().getIntExtra(Const.KEY_CLASS_ID,0);
-        className = getIntent().getStringExtra(Const.KEY_CLASS_NAME);
+        courseId = getIntent().getIntExtra(Const.KEY_CLASS_ID,0);//取参数
+        className = getIntent().getStringExtra(Const.KEY_CLASS_NAME);//取参数班级
         showTitle(className+"-课表");
         initWeekList();
-        weekList = findViewById(R.id.week_list);
+        weekList = findViewById(R.id.week_list);//绑定
         weekList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedDay = position;
-                weekAdapter.notifyDataSetChanged();
-                changeClassTable();
+                selectedDay = position;//记录选中的哪一天，用来标识，与未选中的区分
+                weekAdapter.notifyDataSetChanged();//通知刷新
+                changeClassTable();//创建课表
             }
         });
-        tableList = findViewById(R.id.table_list);
-        weekAdapter = new CommonAdapter<String>(this,weeks,R.layout.layout_week_item) {
+        tableList = findViewById(R.id.table_list);//绑定
+        weekAdapter = new CommonAdapter<String>(this,weeks,R.layout.layout_week_item) {//创建适配器
             @Override
-            public void convert(ViewHolder helper, String item, int postion) {
+            public void convert(ViewHolder helper, String item, int postion) {//设置weekListView每一行的显示样式
                 TextView textView =  helper.getView(R.id.week_day);
-                textView.setText(weeks.get(postion));
-                textView.setSelected(selectedDay == postion);
+                textView.setText(weeks.get(postion));//设置文字
+                textView.setSelected(selectedDay == postion);//设置是否选中
             }
         };
-        weekList.setAdapter(weekAdapter);
-        loadCourseData();
+        weekList.setAdapter(weekAdapter);//赋值适配器
+        loadCourseData();//请求课程表
     }
 
     private void loadCourseData() {
-        LoadCourseTableTask loadCourseTableTask = new LoadCourseTableTask(taskListener,LoadCourceTableResult.class);
-        loadCourseTableTask.setParam(courseId+"");
+        LoadCourseTableTask loadCourseTableTask = new LoadCourseTableTask(taskListener,LoadCourceTableResult.class);//创建课程表的网络请求
+        loadCourseTableTask.setParam(courseId+"");//给请求加参数
         loadCourseTableTask.execute();
     }
 
@@ -75,9 +75,9 @@ public class ClassTableActivity extends BaseActivity {
         @Override
         public void onTaskComplete(TaskListener<LoadCourceTableResult> listener, LoadCourceTableResult result, Exception e) {
              if (result != null && result.isSuccess()){
-                 mCourseList = result.result;
+                 mCourseList = result.result;//请求的结果付给所有的课程表
                 if (courseAdapter != null){
-                    selectCourseInfo.clear();
+                    selectCourseInfo.clear();//清除缓存
                     try {
                         selectCourseInfo.addAll(result.result.get(selectedDay));
                     }catch (Exception e1){
@@ -98,11 +98,11 @@ public class ClassTableActivity extends BaseActivity {
      */
     private void changeClassTable() {
          try {
-             selectCourseInfo = mCourseList.get(selectedDay);
+             selectCourseInfo = mCourseList.get(selectedDay);//从所有课表的集合中取出选中当天的课程列表
          }catch (Exception e){
               selectCourseInfo = new ArrayList<>();
          }
-         courseAdapter.notifyDataSetChanged();
+         courseAdapter.notifyDataSetChanged();//通知更新
     }
 
     private void initWeekList() {
