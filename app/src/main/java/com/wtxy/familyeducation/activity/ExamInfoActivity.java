@@ -185,11 +185,10 @@ public class ExamInfoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//从别的页面返回触发这个方法
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2000 && resultCode == 2000) {//从选择班级页面回来，取一下班级信息
-            ClassInfo classInfo = (ClassInfo) data.getSerializableExtra("classInfo");
-            if (classInfo != null && mGradeInfo != null) {
-                mGradeInfo.class_id = classInfo.getClass_id();//取班级id和名称，赋值给考试对象，用于保存上传
-                mGradeInfo.class_name = classInfo.getClass_name();
+        if (requestCode == 2000 && resultCode == 1000) {//从选择班级页面回来，取一下班级信息
+            if ( mGradeInfo != null) {
+                mGradeInfo.class_id = data.getIntExtra("class_id", 0);//取班级id和名称，赋值给考试对象，用于保存上传
+                mGradeInfo.class_name = data.getStringExtra("class_name");
                 tvClass.setText(mGradeInfo.class_name);//当前页面上的班级信息也显示上
             }
         } else if (requestCode == 1000 && resultCode == 1) {//从选择科目页面回来，取一下科目信息
