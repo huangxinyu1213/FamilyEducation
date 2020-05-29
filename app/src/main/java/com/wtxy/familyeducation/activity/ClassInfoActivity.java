@@ -35,13 +35,13 @@ public class ClassInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_class_info);
         super.onCreate(savedInstanceState);
-        tvClassName = findViewById(R.id.tv_content);
-        listview = findViewById(R.id.listview);
+        tvClassName = findViewById(R.id.tv_content);//将控件与属性绑定
+        listview = findViewById(R.id.listview);//将控件与属性绑定
         classInfo = (ClassInfo) getIntent().getSerializableExtra(Const.KEY_CLASS_INFO);//查找上一次切换，取出刚刚存的信息
         if (classInfo == null){
             return;
         }
-        tvClassName.setText(classInfo.getClass_name());//赋值
+        tvClassName.setText(classInfo.getClass_name());//赋值（赋值什么）
         classTable = findViewById(R.id.class_table);//绑定
         classTable.setOnClickListener(new View.OnClickListener() {
             @Override

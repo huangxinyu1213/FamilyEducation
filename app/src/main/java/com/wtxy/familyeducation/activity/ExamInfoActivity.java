@@ -40,9 +40,9 @@ import java.util.Random;
 public class ExamInfoActivity extends BaseActivity {
     private EditText edtTitle;//考试名称输入框
     private RelativeLayout rl_check_subject;//选择科目一行的布局，用于点击
-    private TextView tv_subject;//科目名称
-    private TextView tvClass;//班级名称
-    private LinearLayout llGrade;//学生列表布局，新建考试信息的时候不展示
+    private TextView tv_subject;//显示科目名称
+    private TextView tvClass;//显示班级名称
+    private LinearLayout llGrade;//分数布局，新建考试信息的时候不展示
     private RelativeLayout rl_check_class;//选择班级一行的布局，用于点击
     private ExamInfo mGradeInfo;//考试信息，null表示新建，否则是查看详情
     private List<StudentInfo> studentInfoList;//当前班级学生list
@@ -50,7 +50,7 @@ public class ExamInfoActivity extends BaseActivity {
 
     public static Intent newIntent(Context context, ExamInfo gradeInfo) {
         Intent intent = new Intent(context, ExamInfoActivity.class);
-        intent.putExtra("GradeInfo", gradeInfo);//先存
+        intent.putExtra("GradeInfo", gradeInfo);//先存在intent里面
         return intent;
     }
 
@@ -58,28 +58,28 @@ public class ExamInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_grand_info);
         super.onCreate(savedInstanceState);
-        mGradeInfo = (ExamInfo) getIntent().getSerializableExtra("GradeInfo");//先取参数，不一定能取到
+        mGradeInfo = (ExamInfo) getIntent().getSerializableExtra("GradeInfo");//先取参数，不一定能取到（新建的取不到）
         showTitle("考试详情");
         showRightBtn("保存");
-        scoreList = new ArrayList<>();//初始化数组
+        scoreList = new ArrayList<>();//初始化数组（申明的对象不初始化就是空）
         studentInfoList = new ArrayList<>();//初始化数组
 //        getTestScore();
-        edtTitle = findViewById(R.id.edtTitle);
-        rl_check_subject = findViewById(R.id.rl_check_subject);
-        tv_subject = findViewById(R.id.tv_subject);
-        tvClass = findViewById(R.id.tvClass);
-        llGrade = findViewById(R.id.llGrade);
-        rl_check_class = findViewById(R.id.rl_check_class);
+        edtTitle = findViewById(R.id.edtTitle);//绑定
+        rl_check_subject = findViewById(R.id.rl_check_subject);//选择科目
+        tv_subject = findViewById(R.id.tv_subject);//科目名称
+        tvClass = findViewById(R.id.tvClass);//班级名称
+        llGrade = findViewById(R.id.llGrade);//选择科目区域
+        rl_check_class = findViewById(R.id.rl_check_class);//选择班级区域
         //null表示新增，标题、班级、科目部分允许编辑，并设置跳转
         if (mGradeInfo == null) {
             edtTitle.setEnabled(true);//设置可编辑
             rl_check_subject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //跳转选科目，标识设为1000
+                    //跳转选科目，标识设为1000，设置点击事件
                     Intent intent = new Intent(ExamInfoActivity.this, SubjectListActivity.class);
-                    intent.putExtra(Const.KEY_IS_SELECT, true);
-                    startActivityForResult(intent, 1000);
+                    intent.putExtra(Const.KEY_IS_SELECT, true);//用来选择的，选择就是true
+                    startActivityForResult(intent, 1000);//1000表示去科目信息
                 }
             });
             rl_check_class.setOnClickListener(new View.OnClickListener() {
@@ -87,17 +87,17 @@ public class ExamInfoActivity extends BaseActivity {
                 public void onClick(View v) {
                     //跳转选班级，标识设为2000
                     Intent intent = new Intent(ExamInfoActivity.this, ChoiceClassActivity.class);
-                    startActivityForResult(intent, 2000);
+                    startActivityForResult(intent, 2000);//2000表示取班级信息
                 }
             });
-            llGrade.setVisibility(View.GONE);//新增不显示学生列表
-            mGradeInfo = new ExamInfo();//创建空对象，用于后面保存属性，新建考试信息
+            llGrade.setVisibility(View.GONE);//新增不显示学生列表，显示用setVisibility(View.VISIBLE)，不显示用setVisibility(View.GONE)
+            mGradeInfo = new ExamInfo();//创建空对象，用于后面保存属性，新建考试信息，初始化
         } else {//当考试信息不为空，表示查看考试信息，并可以编辑学生分数
             //标题、科目、班级部分不允许编辑，没有设置跳转，填充考试信息
-            edtTitle.setEnabled(false);
-            edtTitle.setText(mGradeInfo.exam_name);
-            tv_subject.setText(mGradeInfo.subject_name);
-            tvClass.setText(mGradeInfo.class_name);
+            edtTitle.setEnabled(false);//不可编辑
+            edtTitle.setText(mGradeInfo.exam_name);//显示考试信息
+            tv_subject.setText(mGradeInfo.subject_name);//显示科目信息
+            tvClass.setText(mGradeInfo.class_name);//显示班级信息
             //请求学生列表接口
             loadStudentList();
         }
@@ -164,7 +164,7 @@ public class ExamInfoActivity extends BaseActivity {
             Toast.makeText(this, "请输入或选择对应的信息", Toast.LENGTH_SHORT).show();
             return;
         }
-        AddExamTask addExamTask = new AddExamTask(new TaskListener<HttpResult>() {
+        AddExamTask addExamTask = new AddExamTask(new TaskListener<HttpResult>() {//申明一个添加考试的网络请求
             @Override
             public void onTaskStart(TaskListener<HttpResult> listener) {
 
@@ -175,10 +175,10 @@ public class ExamInfoActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra("GradeInfo", mGradeInfo);
                 setResult(300, intent);
-                finish();
+                finish();//退回上个页面（考试管理页面）
             }
         }, HttpResult.class);
-        addExamTask.setParam(mGradeInfo);
+        addExamTask.setParam(mGradeInfo);//网络请求中家长参数mGradeInfo，所有需要的信息都有了
         addExamTask.execute();
     }
 
