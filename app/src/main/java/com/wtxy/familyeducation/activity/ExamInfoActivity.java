@@ -42,7 +42,7 @@ public class ExamInfoActivity extends BaseActivity {
     private RelativeLayout rl_check_subject;//选择科目一行的布局，用于点击
     private TextView tv_subject;//科目名称
     private TextView tvClass;//班级名称
-    private LinearLayout llGrade;//分数布局，新建考试信息的时候不展示
+    private LinearLayout llGrade;//学生列表布局，新建考试信息的时候不展示
     private RelativeLayout rl_check_class;//选择班级一行的布局，用于点击
     private ExamInfo mGradeInfo;//考试信息，null表示新建，否则是查看详情
     private List<StudentInfo> studentInfoList;//当前班级学生list

@@ -47,7 +47,6 @@ public class ClassTableActivity extends BaseActivity {
                 changeClassTable();//创建课表
             }
         });
-        tableList = findViewById(R.id.table_list);//绑定
         weekAdapter = new CommonAdapter<String>(this,weeks,R.layout.layout_week_item) {//创建适配器
             @Override
             public void convert(ViewHolder helper, String item, int postion) {//设置weekListView每一行的显示样式
@@ -57,6 +56,11 @@ public class ClassTableActivity extends BaseActivity {
             }
         };
         weekList.setAdapter(weekAdapter);//赋值适配器
+
+        selectCourseInfo = new ArrayList<>();
+        tableList = findViewById(R.id.table_list);//绑定
+        courseAdapter = new CourseAdapter(this,selectCourseInfo,R.layout.layout_course_item);
+        tableList.setAdapter(courseAdapter);
         loadCourseData();//请求课程表
     }
 
@@ -76,19 +80,13 @@ public class ClassTableActivity extends BaseActivity {
         public void onTaskComplete(TaskListener<LoadCourceTableResult> listener, LoadCourceTableResult result, Exception e) {
              if (result != null && result.isSuccess()){
                  mCourseList = result.result;//请求的结果付给所有的课程表
-                if (courseAdapter != null){
-                    selectCourseInfo.clear();//清除缓存
-                    try {
-                        selectCourseInfo.addAll(result.result.get(selectedDay));
-                    }catch (Exception e1){
+                 selectCourseInfo.clear();//清除缓存
+                 try {
+                     selectCourseInfo.addAll(result.result.get(selectedDay));
+                 }catch (Exception e1){
 
-                    }
-                    courseAdapter.notifyDataSetChanged();
-                }else {
-                    selectCourseInfo = result.result.get(selectedDay);
-                    courseAdapter = new CourseAdapter(ClassTableActivity.this,selectCourseInfo,R.layout.layout_course_item);
-                    tableList.setAdapter(courseAdapter);
-                }
+                 }
+                 courseAdapter.notifyDataSetChanged();
              }
         }
     };
@@ -98,7 +96,8 @@ public class ClassTableActivity extends BaseActivity {
      */
     private void changeClassTable() {
          try {
-             selectCourseInfo = mCourseList.get(selectedDay);//从所有课表的集合中取出选中当天的课程列表
+             selectCourseInfo.clear();
+             selectCourseInfo.addAll(mCourseList.get(selectedDay));//从所有课表的集合中取出选中当天的课程列表
          }catch (Exception e){
               selectCourseInfo = new ArrayList<>();
          }
@@ -111,8 +110,6 @@ public class ClassTableActivity extends BaseActivity {
         weeks.add("周三");
         weeks.add("周四");
         weeks.add("周五");
-        weeks.add("周六");
-        weeks.add("周日");
     }
 
 
